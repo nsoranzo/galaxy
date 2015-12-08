@@ -609,14 +609,21 @@ class AdminToolshed( AdminGalaxy ):
                                                                                        updated_metadata_dict=updated_metadata,
                                                                                        updated_changeset_revision=updating_to_changeset_revision,
                                                                                        updated_ctx_rev=updating_to_ctx_rev )
-            if tool_dependencies_dict:
+            message = "The installed repository named '%s' has been updated to change set revision '%s'.  " % \
+                ( escape( str( repository.name ) ), updating_to_changeset_revision )
+            install_tool_dependencies = CheckboxField.is_checked( kwd.get( 'install_tool_dependencies', '' ) )
+            if install_tool_dependencies and tool_dependencies_dict:
                 tool_dependencies = tool_dependency_util.create_tool_dependency_objects( trans.app,
                                                                                          repository,
                                                                                          relative_install_dir,
                                                                                          set_status=False )
-                message = "The installed repository named '%s' has been updated to change set revision '%s'.  " % \
-                    ( escape( str( repository.name ) ), updating_to_changeset_revision )
                 self.initiate_tool_dependency_installation( trans, tool_dependencies, message=message, status=status )
+            else:
+                return trans.response.send_redirect( web.url_for( controller='admin_toolshed',
+                                                          action='manage_repository',
+                                                          id=trans.security.encode_id( repository.id ),
+                                                          message=message,
+                                                          status=status ) )
         # Handle tool dependencies check box.
         if trans.app.config.tool_dependency_dir is None:
             if tool_dependencies_dict:
