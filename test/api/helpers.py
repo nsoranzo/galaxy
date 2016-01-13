@@ -416,15 +416,12 @@ class BaseDatasetCollectionPopulator( object ):
         # 2-tuples of form (name, dataset_content).
         if contents and isinstance(contents[0], tuple):
             hdas = self.__datasets( history_id, count=count, contents=[c[1] for c in contents] )
-
-            def hda_to_identifier(i, hda):
-                return dict(name=contents[i][0], src="hda", id=hda["id"])
+            element_identifiers = map(lambda ( i, hda ): dict( name=contents[i][0], src="hda", id=hda[ "id" ] ),
+                                      enumerate( hdas ) )
         else:
             hdas = self.__datasets( history_id, count=count, contents=contents )
-
-            def hda_to_identifier(i, hda):
-                return dict(name="data%d" % ( i + 1 ), src="hda", id=hda["id"])
-        element_identifiers = map( hda_to_identifier, enumerate( hdas ) )
+            element_identifiers = map(lambda ( i, hda ): dict( name="data%d" % ( i + 1 ), src="hda", id=hda[ "id" ] ) ,
+                                      enumerate( hdas ) )
         return element_identifiers
 
     def __create( self, payload ):
