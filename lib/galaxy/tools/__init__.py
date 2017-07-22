@@ -34,7 +34,6 @@ from galaxy.tools.actions import DefaultToolAction
 from galaxy.tools.actions.data_manager import DataManagerToolAction
 from galaxy.tools.actions.data_source import DataSourceToolAction
 from galaxy.tools.actions.model_operations import ModelOperationToolAction
-from galaxy.tools.actions.upload import UploadToolAction
 from galaxy.tools.deps import (
     CachedDependencyManager,
     views
@@ -115,12 +114,13 @@ GALAXY_LIB_TOOLS_UNVERSIONED = [
     "GeneBed_Maf_Fasta2",
     "maf_stats1",
     "Interval2Maf1",
+    "Interval2Maf_pairwise1",
     "MAF_To_Interval1",
     "MAF_filter",
     "MAF_To_Fasta1",
     "MAF_Reverse_Complement_1",
     "MAF_split_blocks_by_species1",
-    "maf_limit_size1",
+    "MAF_Limit_To_Species1",
     "maf_by_block_number1",
     "wiggle2simple1",
     # Converters
@@ -148,6 +148,12 @@ GALAXY_LIB_TOOLS_UNVERSIONED = [
     "tabular_to_dbnsfp",
     # Tools improperly migrated using Galaxy (from shed other)
     "column_join",
+    "gd_coverage_distributions",  # Genome Diversity tools from miller-lab
+    "gd_dpmix",
+    "gd_pca",
+    "gd_phylogenetic_tree",
+    "gd_population_structure",
+    "gd_prepare_population_structure",
 ]
 # Tools that needed galaxy on the PATH in the past but no longer do along
 # with the version at which they were fixed.
@@ -190,7 +196,7 @@ class ToolBox( BaseGalaxyToolBox ):
     how to construct them, action types, dependency management, etc....
     """
 
-    def __init__( self, config_filenames, tool_root_dir, app, tool_conf_watcher=None ):
+    def __init__( self, config_filenames, tool_root_dir, app ):
         self._reload_count = 0
         self.tool_location_fetcher = ToolLocationFetcher()
         super( ToolBox, self ).__init__(
@@ -248,13 +254,6 @@ class ToolBox( BaseGalaxyToolBox ):
             ToolClass = Tool
         tool = ToolClass( config_file, tool_source, self.app, guid=guid, repository_id=repository_id, **kwds )
         return tool
-
-    def handle_datatypes_changed( self ):
-        """ Refresh upload tools when new datatypes are added. """
-        for tool_id in self._tools_by_id:
-            tool = self._tools_by_id[ tool_id ]
-            if isinstance( tool.tool_action, UploadToolAction ):
-                self.reload_tool_by_id( tool_id )
 
     def get_tool_components( self, tool_id, tool_version=None, get_loaded_tools_by_lineage=False, set_selected=False ):
         """
@@ -415,9 +414,8 @@ class Tool( object, Dictifiable ):
         self.guid = guid
         self.old_id = None
         self.version = None
+        self._lineage = None
         self.dependencies = []
-        # Enable easy access to this tool's version lineage.
-        self.lineage_ids = []
         # populate toolshed repository info, if available
         self.populate_tool_shed_info()
         # add tool resource parameters
@@ -441,19 +439,17 @@ class Tool( object, Dictifiable ):
         return self.app.model.context
 
     @property
-    def tool_version( self ):
-        """Return a ToolVersion if one exists for our id"""
-        return self.app.install_model.context.query( self.app.install_model.ToolVersion ) \
-                                             .filter( self.app.install_model.ToolVersion.table.c.tool_id == self.id ) \
-                                             .first()
+    def lineage(self):
+        """Return ToolLineage for this tool."""
+        return self._lineage
 
     @property
     def tool_versions( self ):
         # If we have versions, return them.
-        tool_version = self.tool_version
-        if tool_version:
-            return tool_version.get_versions( self.app )
-        return []
+        if self.lineage:
+            return self.lineage.get_versions()
+        else:
+            return []
 
     @property
     def tool_shed_repository( self ):
@@ -1070,13 +1066,14 @@ class Tool( object, Dictifiable ):
     def populate_tool_shed_info( self ):
         if self.repository_id is not None and self.app.name == 'galaxy':
             repository_id = self.app.security.decode_id( self.repository_id )
-            tool_shed_repository = self.app.install_model.context.query( self.app.install_model.ToolShedRepository ).get( repository_id )
-            if tool_shed_repository:
-                self.tool_shed = tool_shed_repository.tool_shed
-                self.repository_name = tool_shed_repository.name
-                self.repository_owner = tool_shed_repository.owner
-                self.changeset_revision = tool_shed_repository.changeset_revision
-                self.installed_changeset_revision = tool_shed_repository.installed_changeset_revision
+            if hasattr(self.app, 'tool_shed_repository_cache'):
+                tool_shed_repository = self.app.tool_shed_repository_cache.get_installed_repository( repository_id=repository_id )
+                if tool_shed_repository:
+                    self.tool_shed = tool_shed_repository.tool_shed
+                    self.repository_name = tool_shed_repository.name
+                    self.repository_owner = tool_shed_repository.owner
+                    self.changeset_revision = tool_shed_repository.changeset_revision
+                    self.installed_changeset_revision = tool_shed_repository.installed_changeset_revision
 
     @property
     def help(self):
@@ -1797,7 +1794,7 @@ class Tool( object, Dictifiable ):
         if job:
             try:
                 job_params = job.get_param_values( self.app, ignore_errors=True )
-                tool_warnings = self.check_and_update_param_values( job_params, request_context, update_values=False )
+                tool_warnings = self.check_and_update_param_values( job_params, request_context, update_values=True )
                 self._map_source_to_history( request_context, self.inputs, job_params )
                 tool_message = self._compare_tool_version( job )
                 params_to_incoming( kwd, self.inputs, job_params, self.app )
@@ -1806,46 +1803,6 @@ class Tool( object, Dictifiable ):
 
         # create parameter object
         params = galaxy.util.Params( kwd, sanitize=False )
-
-        # populates model from state
-        def populate_model( inputs, state_inputs, group_inputs, other_values=None ):
-            other_values = ExpressionContext( state_inputs, other_values )
-            for input_index, input in enumerate( inputs.values() ):
-                tool_dict = None
-                group_state = state_inputs.get( input.name, {} )
-                if input.type == 'repeat':
-                    tool_dict = input.to_dict( request_context )
-                    group_cache = tool_dict[ 'cache' ] = {}
-                    for i in range( len( group_state ) ):
-                        group_cache[ i ] = []
-                        populate_model( input.inputs, group_state[ i ], group_cache[ i ], other_values )
-                elif input.type == 'conditional':
-                    tool_dict = input.to_dict( request_context )
-                    if 'test_param' in tool_dict:
-                        test_param = tool_dict[ 'test_param' ]
-                        test_param[ 'value' ] = input.test_param.value_to_basic( group_state.get( test_param[ 'name' ], input.test_param.get_initial_value( request_context, other_values ) ), self.app )
-                        test_param[ 'text_value' ] = input.test_param.value_to_display_text( test_param[ 'value' ] )
-                        for i in range( len( tool_dict['cases'] ) ):
-                            current_state = {}
-                            if i == group_state.get( '__current_case__' ):
-                                current_state = group_state
-                            populate_model( input.cases[ i ].inputs, current_state, tool_dict[ 'cases' ][ i ][ 'inputs' ], other_values )
-                elif input.type == 'section':
-                    tool_dict = input.to_dict( request_context )
-                    populate_model( input.inputs, group_state, tool_dict[ 'inputs' ], other_values )
-                else:
-                    try:
-                        tool_dict = input.to_dict( request_context, other_values=other_values )
-                        tool_dict[ 'value' ] = input.value_to_basic( state_inputs.get( input.name, input.get_initial_value( request_context, other_values ) ), self.app, use_security=True )
-                        tool_dict[ 'text_value' ] = input.value_to_display_text( tool_dict[ 'value' ] )
-                    except Exception as e:
-                        tool_dict = input.to_dict( request_context )
-                        log.exception('tools::to_json() - Skipping parameter expansion \'%s\': %s.' % ( input.name, e ) )
-                        pass
-                if input_index >= len( group_inputs ):
-                    group_inputs.append( tool_dict )
-                else:
-                    group_inputs[ input_index ] = tool_dict
 
         # expand incoming parameters (parameters might trigger multiple tool executions,
         # here we select the first execution only in order to resolve dynamic parameters)
@@ -1865,7 +1822,7 @@ class Tool( object, Dictifiable ):
         # create tool model
         tool_model = self.to_dict( request_context )
         tool_model[ 'inputs' ] = []
-        populate_model( self.inputs, state_inputs, tool_model[ 'inputs' ] )
+        self.populate_model( request_context, self.inputs, state_inputs, tool_model[ 'inputs' ] )
 
         # create tool help
         tool_help = ''
@@ -1874,11 +1831,7 @@ class Tool( object, Dictifiable ):
             tool_help = unicodify( tool_help, 'utf-8' )
 
         # create tool versions
-        tool_versions = []
-        tools = self.app.toolbox.get_loaded_tools_by_lineage( self.id )
-        for t in tools:
-            if t.version not in tool_versions:
-                tool_versions.append( t.version )
+        tool_versions = self.lineage.tool_versions if self.lineage else []  # lineage may be `None` if tool is not loaded into tool panel
 
         # update tool model
         tool_model.update({
@@ -1902,6 +1855,50 @@ class Tool( object, Dictifiable ):
             'enctype'       : self.enctype
         })
         return tool_model
+
+    def populate_model( self, request_context, inputs, state_inputs, group_inputs, other_values=None ):
+        """
+        Populates the tool model consumed by the client form builder.
+        """
+        other_values = ExpressionContext( state_inputs, other_values )
+        for input_index, input in enumerate( inputs.values() ):
+            tool_dict = None
+            group_state = state_inputs.get( input.name, {} )
+            if input.type == 'repeat':
+                tool_dict = input.to_dict( request_context )
+                group_cache = tool_dict[ 'cache' ] = {}
+                for i in range( len( group_state ) ):
+                    group_cache[ i ] = []
+                    self.populate_model( request_context, input.inputs, group_state[ i ], group_cache[ i ], other_values )
+            elif input.type == 'conditional':
+                tool_dict = input.to_dict( request_context )
+                if 'test_param' in tool_dict:
+                    test_param = tool_dict[ 'test_param' ]
+                    test_param[ 'value' ] = input.test_param.value_to_basic( group_state.get( test_param[ 'name' ], input.test_param.get_initial_value( request_context, other_values ) ), self.app )
+                    test_param[ 'text_value' ] = input.test_param.value_to_display_text( test_param[ 'value' ] )
+                    for i in range( len( tool_dict['cases'] ) ):
+                        current_state = {}
+                        if i == group_state.get( '__current_case__' ):
+                            current_state = group_state
+                        self.populate_model( request_context, input.cases[ i ].inputs, current_state, tool_dict[ 'cases' ][ i ][ 'inputs' ], other_values )
+            elif input.type == 'section':
+                tool_dict = input.to_dict( request_context )
+                self.populate_model( request_context, input.inputs, group_state, tool_dict[ 'inputs' ], other_values )
+            else:
+                try:
+                    initial_value = input.get_initial_value( request_context, other_values )
+                    tool_dict = input.to_dict( request_context, other_values=other_values )
+                    tool_dict[ 'value' ] = input.value_to_basic( state_inputs.get( input.name, initial_value ), self.app, use_security=True )
+                    tool_dict[ 'default_value' ] = input.value_to_basic( initial_value, self.app, use_security=True )
+                    tool_dict[ 'text_value' ] = input.value_to_display_text( tool_dict[ 'value' ] )
+                except Exception as e:
+                    tool_dict = input.to_dict( request_context )
+                    log.exception('tools::to_json() - Skipping parameter expansion \'%s\': %s.' % ( input.name, e ) )
+                    pass
+            if input_index >= len( group_inputs ):
+                group_inputs.append( tool_dict )
+            else:
+                group_inputs[ input_index ] = tool_dict
 
     def _get_job_remap( self, job):
         if job:

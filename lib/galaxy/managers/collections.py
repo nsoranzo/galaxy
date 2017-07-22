@@ -36,7 +36,7 @@ class DatasetCollectionManager( object ):
 
         self.hda_manager = hdas.HDAManager( app )
         self.history_manager = histories.HistoryManager( app )
-        self.tag_manager = tags.GalaxyTagManager( app )
+        self.tag_manager = tags.GalaxyTagManager( app.model.context )
         self.ldda_manager = lddas.LDDAManager( app )
 
     def create( self, trans, parent, name, collection_type, element_identifiers=None,
@@ -98,11 +98,12 @@ class DatasetCollectionManager( object ):
             message = "Internal logic error - create called with unknown parent type %s" % type( parent )
             log.exception( message )
             raise MessageException( message )
-        tags = tags or []
+        tags = tags or {}
         if implicit_collection_info:
             for k, v in implicit_collection_info.get('implicit_inputs', []):
-                tags.extend(v.tags)
-        for tag in tags:
+                for tag in [t for t in v.tags if t.user_tname == 'name']:
+                    tags[tag.value] = tag
+        for _, tag in tags.items():
             dataset_collection_instance.tags.append(tag.copy())
 
         return self.__persist( dataset_collection_instance )
@@ -187,6 +188,8 @@ class DatasetCollectionManager( object ):
         assert source == "hdca"  # for now
         source_hdca = self.__get_history_collection_instance( trans, encoded_source_id )
         new_hdca = source_hdca.copy()
+        tags_str = self.tag_manager.get_tags_str(source_hdca.tags)
+        self.tag_manager.apply_item_tags(trans.get_user(), new_hdca, tags_str)
         parent.add_dataset_collection( new_hdca )
         trans.sa_session.add( new_hdca )
         trans.sa_session.flush()

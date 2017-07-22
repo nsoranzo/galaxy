@@ -6,6 +6,7 @@ import datetime
 import logging
 import os
 import pwd
+import shlex
 import shutil
 import string
 import subprocess
@@ -180,6 +181,8 @@ class JobConfiguration( object, ConfiguresHandlers ):
                 if plugin.get('type') == 'runner':
                     workers = plugin.get('workers', plugins.get('workers', JobConfiguration.DEFAULT_NWORKERS))
                     runner_kwds = self.__get_params(plugin)
+                    if not self.__is_enabled(runner_kwds):
+                        continue
                     runner_info = dict(id=plugin.get('id'),
                                        load=plugin.get('load'),
                                        workers=int(workers),
@@ -223,7 +226,11 @@ class JobConfiguration( object, ConfiguresHandlers ):
                 if metrics_elements:
                     job_metrics.set_destination_conf_element( id, metrics_elements[ 0 ] )
             job_destination = JobDestination(**dict(destination.items()))
-            job_destination['params'] = self.__get_params(destination)
+            params = self.__get_params(destination)
+            if not self.__is_enabled(params):
+                continue
+
+            job_destination['params'] = params
             job_destination['env'] = self.__get_envs(destination)
             destination_resubmits = self.__get_resubmits(destination)
             if destination_resubmits:
@@ -489,6 +496,15 @@ class JobConfiguration( object, ConfiguresHandlers ):
                 delay=resubmit.get('delay'),
             ) )
         return rval
+
+    def __is_enabled(self, params):
+        """Check for an enabled parameter - pop it out - and return as boolean."""
+        enabled = True
+        if "enabled" in params:
+            raw_enabled = params.pop("enabled")
+            enabled = util.asbool(raw_enabled)
+
+        return enabled
 
     @property
     def default_job_tool_configuration(self):
@@ -1200,7 +1216,7 @@ class JobWrapper( object, HasResourceParameters ):
             # need to update all associated output hdas, i.e. history was shared with job running
             for dataset in dataset_assoc.dataset.dataset.history_associations + dataset_assoc.dataset.dataset.library_associations:
                 purged = dataset.dataset.purged
-                if not purged:
+                if not purged and dataset.dataset.external_filename is None:
                     trynum = 0
                     while trynum < self.app.config.retry_job_output_collection:
                         try:
@@ -1741,14 +1757,15 @@ class JobWrapper( object, HasResourceParameters ):
 
     def _change_ownership( self, username, gid ):
         job = self.get_job()
-        # FIXME: hardcoded path
         external_chown_script = self.get_destination_configuration("external_chown_script", None)
-        cmd = [ '/usr/bin/sudo', '-E', external_chown_script, self.working_directory, username, str( gid ) ]
-        log.debug( '(%s) Changing ownership of working directory with: %s' % ( job.id, ' '.join( cmd ) ) )
-        p = subprocess.Popen( cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE )
-        # TODO: log stdout/stderr
-        stdout, stderr = p.communicate()
-        assert p.returncode == 0
+        if external_chown_script is not None:
+            cmd = shlex.split(external_chown_script)
+            cmd.extend( [ self.working_directory, username, str( gid ) ] )
+            log.debug( '(%s) Changing ownership of working directory with: %s' % ( job.id, ' '.join( cmd ) ) )
+            p = subprocess.Popen( cmd, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE )
+            # TODO: log stdout/stderr
+            stdout, stderr = p.communicate()
+            assert p.returncode == 0
 
     def change_ownership_for_run( self ):
         job = self.get_job()
@@ -1770,10 +1787,7 @@ class JobWrapper( object, HasResourceParameters ):
     def user_system_pwent( self ):
         if self.__user_system_pwent is None:
             job = self.get_job()
-            try:
-                self.__user_system_pwent = pwd.getpwnam( job.user.email.split('@')[0] )
-            except:
-                pass
+            self.__user_system_pwent = job.user.system_user_pwent(self.app.config.real_system_username)
         return self.__user_system_pwent
 
     @property
