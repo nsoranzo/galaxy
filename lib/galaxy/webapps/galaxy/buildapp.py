@@ -343,6 +343,12 @@ def populate_api_routes(webapp, app):
                           action='get_custom_builds_metadata',
                           conditions=dict(method=["GET"]))
 
+    webapp.mapper.connect('export_bco',
+                          '/api/histories/{id}/export_bco',
+                          controller='histories',
+                          action='export_bco',
+                          conditions=dict(method=["GET"]))
+
     # =======================
     # ====== TOOLS API ======
     # =======================

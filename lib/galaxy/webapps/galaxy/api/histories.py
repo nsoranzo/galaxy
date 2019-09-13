@@ -524,3 +524,36 @@ class HistoriesController(BaseAPIController, ExportsHistoryMixin, ImportsHistory
             'installed_builds'  : [{'label' : ins, 'value' : ins} for ins in installed_builds],
             'fasta_hdas'        : [{'label' : '%s: %s' % (hda.hid, hda.name), 'value' : trans.security.encode_id(hda.id)} for hda in fasta_hdas],
         }
+
+    @expose_api_anonymous_and_sessionless
+    def export_bco(self, trans, id, **kwd):
+        """
+        GET /api/histories/{id}/export_bco
+        Return a BioCompute Object for the history.
+        """
+        history = self.manager.get_accessible(self.decode_id(id), trans.user, current_history=trans.history)
+        ret_dict = {
+            'bco_id': url_for('export_bco', id=id),  # This is unique only until the history is modified
+            'bco_spec_version': 'https://w3id.org/biocompute/1.3.0/',
+            'checksum': 'TODO',
+            'provenance_domain': {
+                'name': history.name,
+                'version': '',
+                'created': history.create_time.isoformat(),
+                'modified': history.update_time.isoformat(),
+                'contributors': [],
+                'license': '',
+            },
+            'usability_domain': [],
+            'extension_domain': {},
+            'description_domain': {
+                'keywords': [],  # history tags
+                'platform': 'Galaxy',
+                'pipeline_steps': [],  # jobs in the history
+            },
+            'execution_domain': {},
+            'parametric_domain': {},
+            'io_domain': {},
+            'error_domain': {},
+        }
+        return ret_dict
