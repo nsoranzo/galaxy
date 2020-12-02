@@ -4,19 +4,14 @@ on:
 
 jobs:
   labeler:
-    name: "Assign Labels"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/labeler@main
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-
-  milestone:
-    name: "Assign Milestone"
+    name: Assign labels and milestone
     runs-on: ubuntu-latest
     env:
       MILESTONE_NUMBER: 18
     steps:
+      - uses: actions/labeler@main
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
       - run: echo ${{ toJson(github.event.pull_request) }}
       - name: Assign Milestone
         if: |
