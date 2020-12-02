@@ -21,6 +21,8 @@ Community support is available at `Galaxy Help <https://help.galaxyproject.org/>
     :target: https://travis-ci.org/galaxyproject/galaxy
     :alt: Inspect the test results
 
+This is a test!
+
 Galaxy Quickstart
 =================
 
