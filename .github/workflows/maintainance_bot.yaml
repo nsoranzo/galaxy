@@ -12,7 +12,6 @@ jobs:
       - uses: actions/labeler@main
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-      - run: echo ${{ toJson(github.event.pull_request) }}
       - name: Assign Milestone
         if: |
           ! github.event.pull_request.milestone &&
