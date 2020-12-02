@@ -14,16 +14,19 @@ jobs:
   milestone:
     name: "Assign Milestone"
     runs-on: ubuntu-latest
+    env:
+      MILESTONE_NUMBER: 18
     steps:
+      - run: echo ${{ toJson(github.event.pull_request) }}
       - name: Assign Milestone
-        if:  |
-          contains(github.event.pull_request.title, 'WIP') == false &&
-          contains(github.event.pull_request.title, 'merge') == false &&
-          github.event.pull_request.draft == false
-        env:
-          MILESTONE_NUMBER: 18
+        if: |
+          ! github.event.pull_request.milestone &&
+          ! contains(github.event.pull_request.labels.*.name, 'merge') &&
+          ! contains(github.event.pull_request.labels.*.name, 'status/WIP') &&
+          ! contains(github.event.pull_request.title, 'WIP') &&
+          ! github.event.pull_request.draft
         run: |
           curl --request PATCH \
           --url ${{ github.event.pull_request.issue_url }} \
           --header 'authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-          --data-raw '{"milestone":  '$MILESTONE_NUMBER'}'
+          --data-raw '{"milestone": '$MILESTONE_NUMBER'}'
