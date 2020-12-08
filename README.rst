@@ -3,6 +3,8 @@
 
 The latest information about Galaxy can be found on the `Galaxy Community Hub <https://galaxyproject.org/>`__.
 
+ADDED LINE HERE!
+
 Community support is available at `Galaxy Help <https://help.galaxyproject.org/>`__.
 
 .. image:: https://img.shields.io/badge/chat-gitter-blue.svg
