@@ -23,8 +23,9 @@ jobs:
       uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: ''
-    - name: Install tox
-      run: pip install tox
+    - name: conda info
+      run: conda info
     - name: run tests
-      run: tox -e first_startup
+      run: .ci/first_startup.sh
+      shell: bash -l {0}  # need this to have CONDA_EXE set
       working-directory: 'galaxy root'

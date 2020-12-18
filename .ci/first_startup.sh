@@ -4,7 +4,7 @@ URL=http://localhost:8080
 EXIT_CODE=1
 i=0
 echo "Testing for correct startup:"
-bash run.sh --daemon && \
+./run.sh --daemon && \
     while [ "$i" -le $TRIES ]; do
         curl "$URL" && EXIT_CODE=0 && break
         sleep 1
