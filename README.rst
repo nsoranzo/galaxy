@@ -1,6 +1,8 @@
 .. figure:: https://galaxyproject.org/images/galaxy-logos/galaxy_project_logo.jpg
    :alt: Galaxy Logo
 
+Test!!
+
 The latest information about Galaxy can be found on the `Galaxy Community Hub <https://galaxyproject.org/>`__.
 
 Community support is available at `Galaxy Help <https://help.galaxyproject.org/>`__.
