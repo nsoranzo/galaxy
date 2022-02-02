@@ -28,9 +28,9 @@ def _configured_file_sources() -> TestConfiguredFileSources:
     tmp, root = setup_root()
     file_sources_config = ConfiguredFileSourcesConfig()
     plugin = {
-        'type': 'posix',
+        "type": "posix",
     }
-    plugin['root'] = root
+    plugin["root"] = root
     write_file_fixtures(tmp, root)
     file_sources = TestConfiguredFileSources(file_sources_config, conf_dict={"test1": plugin}, test_root=root)
     return file_sources

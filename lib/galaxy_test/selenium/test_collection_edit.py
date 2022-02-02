@@ -1,9 +1,6 @@
 from selenium.webdriver.common.keys import Keys
 
-from .framework import (
-    selenium_test,
-    SeleniumTestCase
-)
+from .framework import selenium_test, SeleniumTestCase
 
 
 class CollectionEditTestCase(SeleniumTestCase):

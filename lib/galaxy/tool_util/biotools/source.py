@@ -10,7 +10,6 @@ from .interface import BiotoolsEntry
 
 
 class BiotoolsMetadataSource:
-
     def get_biotools_metadata(self, biotools_reference: str) -> Optional[BiotoolsEntry]:
         """Return a BiotoolsEntry if available."""
 
@@ -67,7 +66,6 @@ class ApiBiotoolsMetadataSource(BiotoolsMetadataSource):
 
 
 class CascadingBiotoolsMetadataSource(BiotoolsMetadataSource):
-
     def __init__(self, use_api=False, cache=None, content_directory: Optional[str] = None):
         sources: List[BiotoolsMetadataSource] = []
         if content_directory:

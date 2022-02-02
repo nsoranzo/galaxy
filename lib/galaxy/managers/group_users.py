@@ -36,7 +36,9 @@ class GroupUsersManager:
             rval.append(group_user)
         return rval
 
-    def show(self, trans: ProvidesAppContext, id: EncodedDatabaseIdField, group_id: EncodedDatabaseIdField) -> Dict[str, Any]:
+    def show(
+        self, trans: ProvidesAppContext, id: EncodedDatabaseIdField, group_id: EncodedDatabaseIdField
+    ) -> Dict[str, Any]:
         """
         Returns information about a group user.
         """
@@ -89,11 +91,14 @@ class GroupUsersManager:
             raise ObjectNotFound(f"User with id {encoded_user_id} was not found.")
         return user
 
-    def _get_group_user(self, trans: ProvidesAppContext, group: model.Group, user: model.User) -> Optional[model.UserGroupAssociation]:
-        return trans.sa_session.query(model.UserGroupAssociation).filter(
-            model.UserGroupAssociation.user == user,
-            model.UserGroupAssociation.group == group
-        ).one_or_none()
+    def _get_group_user(
+        self, trans: ProvidesAppContext, group: model.Group, user: model.User
+    ) -> Optional[model.UserGroupAssociation]:
+        return (
+            trans.sa_session.query(model.UserGroupAssociation)
+            .filter(model.UserGroupAssociation.user == user, model.UserGroupAssociation.group == group)
+            .one_or_none()
+        )
 
     def _add_user_to_group(self, trans: ProvidesAppContext, group: model.Group, user: model.User):
         gra = model.UserGroupAssociation(user, group)
@@ -109,5 +114,5 @@ class GroupUsersManager:
         return {
             "id": encoded_user_id,
             "email": user.email,
-            "url": url_for('group_user', group_id=encoded_group_id, id=encoded_user_id)
+            "url": url_for("group_user", group_id=encoded_group_id, id=encoded_user_id),
         }

@@ -19,7 +19,7 @@ log = logging.getLogger(__name__)
 
 class UploadsAPIController(BaseGalaxyAPIController):
 
-    READ_CHUNK_SIZE = 2 ** 16
+    READ_CHUNK_SIZE = 2**16
 
     @expose_api_raw_anonymous
     def hooks(self, trans, **kwds):
@@ -41,7 +41,7 @@ class UploadsAPIController(BaseGalaxyAPIController):
         session_id = payload.get("session_id")
         session_start = payload.get("session_start")
         session_chunk = payload.get("session_chunk")
-        if re.match(r'^[\w-]+$', session_id) is None:
+        if re.match(r"^[\w-]+$", session_id) is None:
             raise exceptions.MessageException("Requires a session id.")
         if session_start is None:
             raise exceptions.MessageException("Requires a session start.")

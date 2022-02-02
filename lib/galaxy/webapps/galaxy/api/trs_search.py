@@ -17,6 +17,7 @@ class TrsSearchAPIController(BaseGalaxyAPIController):
     Not trying to emulate the actual underlying GA4GH API interface so throwing
     the search functionality into a different controller than the trs_consumer.
     """
+
     _trs_proxy: TrsProxy = depends(TrsProxy)
 
     @expose_api

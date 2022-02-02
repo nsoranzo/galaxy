@@ -1,10 +1,7 @@
 """Integration tests for the Pulsar embedded runner."""
 
 from galaxy_test.driver import integration_util
-from .test_extended_metadata import (
-    ExtendedMetadataIntegrationInstance,
-    TEST_TOOL_IDS
-)
+from .test_extended_metadata import ExtendedMetadataIntegrationInstance, TEST_TOOL_IDS
 
 
 class ExtendedMetadataOutputsToWorkingDirIntegrationInstance(ExtendedMetadataIntegrationInstance):

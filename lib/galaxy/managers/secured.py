@@ -81,6 +81,7 @@ class OwnableManagerMixin:
 
     This can also be thought of as write/edit privileges.
     """
+
     # declare what we are using from base ModelManager
     model_class: Type[model._HasTable]
 

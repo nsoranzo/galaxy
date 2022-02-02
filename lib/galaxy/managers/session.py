@@ -24,9 +24,15 @@ class GalaxySessionManager:
         """Returns GalaxySession if session_key is valid."""
         # going through self.model since this can be used by Galaxy or Toolshed despite
         # type annotations
-        galaxy_session = self.sa_session.query(self.model.GalaxySession).filter(
-            and_(
-                self.model.GalaxySession.table.c.session_key == session_key,
-                self.model.GalaxySession.table.c.is_valid == true())
-        ).options(joinedload("user")).first()
+        galaxy_session = (
+            self.sa_session.query(self.model.GalaxySession)
+            .filter(
+                and_(
+                    self.model.GalaxySession.table.c.session_key == session_key,
+                    self.model.GalaxySession.table.c.is_valid == true(),
+                )
+            )
+            .options(joinedload("user"))
+            .first()
+        )
         return galaxy_session

@@ -9,6 +9,7 @@ class PairedDatasetCollectionType(BaseDatasetCollectionType):
     """
     Paired (left/right) datasets.
     """
+
     collection_type = "paired"
 
     def __init__(self):

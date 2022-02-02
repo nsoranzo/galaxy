@@ -11,13 +11,11 @@ from ._framework import ApiTestCase
 
 
 class RolesApiTestCase(ApiTestCase):
-
     def setUp(self):
         super().setUp()
         self.dataset_populator = DatasetPopulator(self.galaxy_interactor)
 
     def test_list_and_show(self):
-
         def check_roles_response(response):
             assert_status_code_is(response, 200)
             as_list = response.json()
@@ -67,7 +65,7 @@ class RolesApiTestCase(ApiTestCase):
         }
         response = self._post("roles", payload, admin=True, json=True)
         assert_status_code_is(response, 400)
-        assert_error_code_is(response, error_codes.error_codes_by_name['USER_REQUEST_MISSING_PARAMETER'].code)
+        assert_error_code_is(response, error_codes.error_codes_by_name["USER_REQUEST_MISSING_PARAMETER"].code)
         assert "description" in response.json()["err_msg"]
 
         # Test missing name
@@ -78,7 +76,7 @@ class RolesApiTestCase(ApiTestCase):
         }
         response = self._post("roles", payload, admin=True, json=True)
         assert_status_code_is(response, 400)
-        assert_error_code_is(response, error_codes.error_codes_by_name['USER_REQUEST_MISSING_PARAMETER'].code)
+        assert_error_code_is(response, error_codes.error_codes_by_name["USER_REQUEST_MISSING_PARAMETER"].code)
         assert "name" in response.json()["err_msg"]
 
         # Test invalid type for name
@@ -89,7 +87,7 @@ class RolesApiTestCase(ApiTestCase):
         }
         response = self._post("roles", payload, admin=True, json=True)
         assert_status_code_is(response, 400)
-        assert_error_code_is(response, error_codes.error_codes_by_name['USER_REQUEST_INVALID_PARAMETER'].code)
+        assert_error_code_is(response, error_codes.error_codes_by_name["USER_REQUEST_INVALID_PARAMETER"].code)
         assert "name" in response.json()["err_msg"]
         assert "validation_errors" in response.json()
 

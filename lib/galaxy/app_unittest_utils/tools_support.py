@@ -24,7 +24,6 @@ galaxy.model.set_datatypes_registry(datatypes_registry)
 
 
 class UsesApp:
-
     def setup_app(self):
         self.test_directory = tempfile.mkdtemp()
         self.app = MockApp()
@@ -37,7 +36,7 @@ class UsesApp:
 
 
 # Simple tool with just one text parameter and output.
-SIMPLE_TOOL_CONTENTS = '''<tool id="${tool_id}" name="Test Tool" version="$version" profile="$profile">
+SIMPLE_TOOL_CONTENTS = """<tool id="${tool_id}" name="Test Tool" version="$version" profile="$profile">
     <command>echo "$param1" &lt; $out1</command>
     <inputs>
         <param type="text" name="param1" value="" />
@@ -46,11 +45,11 @@ SIMPLE_TOOL_CONTENTS = '''<tool id="${tool_id}" name="Test Tool" version="$versi
         <data name="out1" format="data" label="Output ($param1)" />
     </outputs>
 </tool>
-'''
+"""
 
 
 # A tool with data parameters (kind of like cat1) my favorite test tool :)
-SIMPLE_CAT_TOOL_CONTENTS = '''<tool id="${tool_id}" name="Test Tool" version="$version" profile="$profile">
+SIMPLE_CAT_TOOL_CONTENTS = """<tool id="${tool_id}" name="Test Tool" version="$version" profile="$profile">
     <command>cat "$param1" #for $r in $repeat# "$r.param2" #end for# &lt; $out1</command>
     <inputs>
         <param type="data" format="tabular" name="param1" value="" />
@@ -62,11 +61,10 @@ SIMPLE_CAT_TOOL_CONTENTS = '''<tool id="${tool_id}" name="Test Tool" version="$v
         <data name="out1" format="data" />
     </outputs>
 </tool>
-'''
+"""
 
 
 class MockActionI:
-
     def execute(self, tool, trans, **kwds):
         pass
 
@@ -122,7 +120,6 @@ class UsesTools(UsesApp):
 
 
 class MockContext:
-
     def __init__(self, model_objects=None):
         self.expunged_all = False
         self.flushed = False
@@ -144,7 +141,6 @@ class MockContext:
 
 
 class MockQuery:
-
     def __init__(self, class_objects):
         self.class_objects = class_objects
 
@@ -155,4 +151,4 @@ class MockQuery:
         return self.class_objects.get(id, None)
 
 
-__all__ = ('UsesApp', )
+__all__ = ("UsesApp",)

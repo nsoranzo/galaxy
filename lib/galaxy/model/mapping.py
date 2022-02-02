@@ -29,9 +29,20 @@ class GalaxyModelMapping(SharedModelMapping):
     GalaxySession: Type
 
 
-def init(file_path, url, engine_options=None, create_tables=False, map_install_models=False,
-        database_query_profiling_proxy=False, object_store=None, trace_logger=None, use_pbkdf2=True,
-        slow_query_log_threshold=0, thread_local_log: Optional[local] = None, log_query_counts=False) -> GalaxyModelMapping:
+def init(
+    file_path,
+    url,
+    engine_options=None,
+    create_tables=False,
+    map_install_models=False,
+    database_query_profiling_proxy=False,
+    object_store=None,
+    trace_logger=None,
+    use_pbkdf2=True,
+    slow_query_log_threshold=0,
+    thread_local_log: Optional[local] = None,
+    log_query_counts=False,
+) -> GalaxyModelMapping:
     """Connect mappings to the database"""
     if engine_options is None:
         engine_options = {}
@@ -42,12 +53,21 @@ def init(file_path, url, engine_options=None, create_tables=False, map_install_m
     # Use PBKDF2 password hashing?
     model.User.use_pbkdf2 = use_pbkdf2
     # Load the appropriate db module
-    engine = build_engine(url, engine_options, database_query_profiling_proxy, trace_logger, slow_query_log_threshold, thread_local_log=thread_local_log, log_query_counts=log_query_counts)
+    engine = build_engine(
+        url,
+        engine_options,
+        database_query_profiling_proxy,
+        trace_logger,
+        slow_query_log_threshold,
+        thread_local_log=thread_local_log,
+        log_query_counts=log_query_counts,
+    )
 
     model_modules = [model]
     if map_install_models:
         import galaxy.model.tool_shed_install.mapping  # noqa: F401
         from galaxy.model import tool_shed_install
+
         galaxy.model.tool_shed_install.mapping.init(url=url, engine_options=engine_options, create_tables=create_tables)
         model_modules.append(tool_shed_install)
 

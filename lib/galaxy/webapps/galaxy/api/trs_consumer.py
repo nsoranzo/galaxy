@@ -9,6 +9,7 @@ from . import BaseGalaxyAPIController, depends
 
 class TrsConsumeAPIController(BaseGalaxyAPIController):
     """Controller for TRS proxying."""
+
     _trs_proxy: TrsProxy = depends(TrsProxy)
 
     @expose_api

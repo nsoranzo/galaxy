@@ -16,6 +16,7 @@ class FunctionalTestCase(unittest.TestCase):
     needs to be launched to run the test, this base class assumes a
     server is already running.
     """
+
     galaxy_driver_class: Optional[type] = None
     history_id: Optional[str]
     host: str
@@ -26,7 +27,7 @@ class FunctionalTestCase(unittest.TestCase):
     _test_driver: Optional[Any]
 
     def setUp(self) -> None:
-        self.history_id = os.environ.get('GALAXY_TEST_HISTORY_ID', None)
+        self.history_id = os.environ.get("GALAXY_TEST_HISTORY_ID", None)
         self.host, self.port, self.url = target_url_parts()
         server_wrapper = self._test_driver and self._test_driver.server_wrappers[0]
         if server_wrapper:

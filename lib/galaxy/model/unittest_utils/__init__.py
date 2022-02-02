@@ -3,6 +3,6 @@ from .data_app import GalaxyDataTestApp, GalaxyDataTestConfig
 
 
 __all__ = [
-    'GalaxyDataTestApp',
-    'GalaxyDataTestConfig',
+    "GalaxyDataTestApp",
+    "GalaxyDataTestConfig",
 ]

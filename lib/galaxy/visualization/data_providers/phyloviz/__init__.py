@@ -24,7 +24,7 @@ class PhylovizDataProvider(BaseDataProvider):
         file_name = self.original_dataset.file_name
         parseMsg = None
         jsonDicts = []
-        rval: Dict[str, Any] = {'dataset_type': self.dataset_type}
+        rval: Dict[str, Any] = {"dataset_type": self.dataset_type}
 
         if file_ext in ["newick", "nhx"]:  # parses newick files
             newickParser = Newick_Parser()

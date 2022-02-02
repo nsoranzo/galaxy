@@ -42,6 +42,7 @@ class BasicSharedApp(BasicApp):
     Code that is shared between Galaxy and the Tool Shed should be annotated as
     using BasicSharedApp instead of StructuredApp below.
     """
+
     application_stack: ApplicationStack
     model: SharedModelMapping
     security: IdEncodingHelper
@@ -55,7 +56,7 @@ class MinimalToolApp(BasicApp):
     sa_session: Union[galaxy_scoped_session, SessionlessContext]
     datatypes_registry: Registry
     object_store: ObjectStore
-    tool_data_table_manager: 'ToolDataTableManager'
+    tool_data_table_manager: "ToolDataTableManager"
     file_sources: ConfiguredFileSources
 
 
@@ -102,6 +103,7 @@ class StructuredApp(MinimalManagerApp):
     (cyclical imports), we're just setting the class attributes to
     Any.
     """
+
     is_webapp: bool  # is_webapp will be set to true when building WSGI app
     new_installation: bool
     tag_handler: GalaxyTagHandler
@@ -129,7 +131,7 @@ class StructuredApp(MinimalManagerApp):
     role_manager: Any  # 'galaxy.managers.roles.RoleManager'
     dynamic_tool_manager: Any  # 'galaxy.managers.tools.DynamicToolManager'
     data_provider_registry: Any  # 'galaxy.visualization.data_providers.registry.DataProviderRegistry'
-    tool_data_tables: 'ToolDataTableManager'
+    tool_data_tables: "ToolDataTableManager"
     genomes: Any  # 'galaxy.visualization.genomes.Genomes'
     error_reports: Any  # 'galaxy.tools.error_reports.ErrorReports'
     tool_cache: Any  # 'galaxy.tools.cache.ToolCache'

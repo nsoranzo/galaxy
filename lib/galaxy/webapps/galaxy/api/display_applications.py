@@ -40,5 +40,5 @@ class DisplayApplicationsController(BaseGalaxyAPIController):
         :type   ids:  list
         """
         payload = payload or {}
-        ids = payload.get('ids', [])
+        ids = payload.get("ids", [])
         return self.manager.reload(ids)

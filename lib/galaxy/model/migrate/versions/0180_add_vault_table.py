@@ -6,12 +6,13 @@ now = datetime.datetime.utcnow
 meta = MetaData()
 
 vault = Table(
-    'vault', meta,
-    Column('key', Text, primary_key=True),
-    Column('parent_key', Text, ForeignKey('vault.key'), index=True, nullable=True),
-    Column('value', Text, nullable=True),
+    "vault",
+    meta,
+    Column("key", Text, primary_key=True),
+    Column("parent_key", Text, ForeignKey("vault.key"), index=True, nullable=True),
+    Column("value", Text, nullable=True),
     Column("create_time", DateTime, default=now),
-    Column("update_time", DateTime, default=now, onupdate=now)
+    Column("update_time", DateTime, default=now, onupdate=now),
 )
 
 

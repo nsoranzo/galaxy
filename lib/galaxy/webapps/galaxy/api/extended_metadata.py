@@ -9,19 +9,17 @@ from galaxy import (
     model,
     web,
 )
-from galaxy.webapps.base.controller import (
-    UsesExtendedMetadataMixin,
-    UsesLibraryMixinItems,
-    UsesStoredWorkflowMixin
-)
+from galaxy.webapps.base.controller import UsesExtendedMetadataMixin, UsesLibraryMixinItems, UsesStoredWorkflowMixin
 from . import BaseGalaxyAPIController, depends
 
 log = logging.getLogger(__name__)
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
-class BaseExtendedMetadataController(BaseGalaxyAPIController, UsesExtendedMetadataMixin, UsesLibraryMixinItems, UsesStoredWorkflowMixin, Generic[T]):
+class BaseExtendedMetadataController(
+    BaseGalaxyAPIController, UsesExtendedMetadataMixin, UsesLibraryMixinItems, UsesStoredWorkflowMixin, Generic[T]
+):
     exmeta_item_id: str
 
     def _get_item_from_id(self, trans, idstr, check_writable=True) -> Optional[T]:

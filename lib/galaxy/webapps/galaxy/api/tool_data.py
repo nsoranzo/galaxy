@@ -18,13 +18,9 @@ from galaxy.web import (
     expose_api,
     expose_api_raw,
 )
-from . import (
-    BaseGalaxyAPIController,
-    depends,
-    Router
-)
+from . import BaseGalaxyAPIController, depends, Router
 
-router = Router(tags=['tool data tables'])
+router = Router(tags=["tool data tables"])
 
 ToolDataTableName = Path(
     ...,  # Mark this field as required
@@ -45,7 +41,7 @@ class FastAPIToolData:
     tool_data_manager: ToolDataManager = depends(ToolDataManager)
 
     @router.get(
-        '/api/tool_data',
+        "/api/tool_data",
         summary="Lists all available data tables",
         response_description="A list with details on individual data tables.",
         require_admin=True,
@@ -55,7 +51,7 @@ class FastAPIToolData:
         return self.tool_data_manager.index()
 
     @router.get(
-        '/api/tool_data/{table_name}',
+        "/api/tool_data/{table_name}",
         summary="Get details of a given data table",
         response_description="A description of the given data table and its content",
         require_admin=True,
@@ -65,7 +61,7 @@ class FastAPIToolData:
         return self.tool_data_manager.show(table_name)
 
     @router.get(
-        '/api/tool_data/{table_name}/reload',
+        "/api/tool_data/{table_name}/reload",
         summary="Reloads a tool data table",
         response_description="A description of the reloaded data table and its content",
         require_admin=True,
@@ -75,7 +71,7 @@ class FastAPIToolData:
         return self.tool_data_manager.reload(table_name)
 
     @router.get(
-        '/api/tool_data/{table_name}/fields/{field_name}',
+        "/api/tool_data/{table_name}/fields/{field_name}",
         summary="Get information about a particular field in a tool data table",
         response_description="Information about a data table field",
         require_admin=True,
@@ -89,7 +85,7 @@ class FastAPIToolData:
         return self.tool_data_manager.show_field(table_name, field_name)
 
     @router.get(
-        '/api/tool_data/{table_name}/fields/{field_name}/files/{file_name}',
+        "/api/tool_data/{table_name}/fields/{field_name}/files/{file_name}",
         summary="Get information about a particular field in a tool data table",
         response_description="Information about a data table field",
         response_class=FileResponse,
@@ -110,7 +106,7 @@ class FastAPIToolData:
         return FileResponse(str(path))
 
     @router.delete(
-        '/api/tool_data/{table_name}',
+        "/api/tool_data/{table_name}",
         summary="Removes an item from a data table",
         response_description="A description of the affected data table and its content",
         require_admin=True,
@@ -128,6 +124,7 @@ class ToolData(BaseGalaxyAPIController):
     """
     RESTful controller for interactions with tool data
     """
+
     tool_data_manager: ToolDataManager = depends(ToolDataManager)
 
     @web.require_admin
@@ -181,8 +178,8 @@ class ToolData(BaseGalaxyAPIController):
                 * values:   <TAB> separated list of column contents, there must be a value for all the columns of the data table
         """
         values: Optional[str] = None
-        if kwd.get('payload', None):
-            values = kwd['payload'].get('values', '')
+        if kwd.get("payload", None):
+            values = kwd["payload"].get("values", "")
         # Here dict(by_alias=True) is required to return
         # `field_value` as `field` since `field` can not be directly
         # used in the pydantic BaseModel and needs to be aliased

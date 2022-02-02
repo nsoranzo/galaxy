@@ -3,6 +3,7 @@ from unittest import SkipTest, TestCase
 
 from galaxy_test.base.api import UsesApiTestCaseMixin
 from galaxy_test.base.testcase import FunctionalTestCase
+
 try:
     from galaxy_test.driver.driver_util import GalaxyTestDriver
 except ImportError:
@@ -25,4 +26,4 @@ class ApiTestCase(FunctionalTestCase, UsesApiTestCaseMixin, TestCase):
         return self._test_driver
 
 
-__all__ = ('ApiTestCase', )
+__all__ = ("ApiTestCase",)

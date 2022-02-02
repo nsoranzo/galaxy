@@ -3,13 +3,8 @@ API operations on the contents of a library folder.
 """
 import logging
 
-from galaxy import (
-    util
-)
-from galaxy.web import (
-    expose_api,
-    expose_api_anonymous
-)
+from galaxy import util
+from galaxy.web import expose_api, expose_api_anonymous
 from galaxy.webapps.galaxy.services.library_folder_contents import LibraryFolderContentsService
 from . import BaseGalaxyAPIController, depends
 
@@ -20,6 +15,7 @@ class FolderContentsController(BaseGalaxyAPIController):
     """
     Class controls retrieval, creation and updating of folder contents.
     """
+
     service: LibraryFolderContentsService = depends(LibraryFolderContentsService)
 
     @expose_api_anonymous
@@ -58,7 +54,7 @@ class FolderContentsController(BaseGalaxyAPIController):
         :raises: MalformedId, InconsistentDatabase, ObjectNotFound,
              InternalServerError
         """
-        include_deleted = util.asbool(kwd.get('include_deleted', False))
+        include_deleted = util.asbool(kwd.get("include_deleted", False))
         return self.service.index(trans, folder_id, limit, offset, search_text, include_deleted)
 
     @expose_api

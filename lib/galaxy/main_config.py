@@ -28,7 +28,7 @@ def absolute_config_path(path, galaxy_root):
 
 
 def config_is_ini(config_file):
-    return config_file and (config_file.endswith('.ini') or config_file.endswith('.ini.sample'))
+    return config_file and (config_file.endswith(".ini") or config_file.endswith(".ini.sample"))
 
 
 def find_config(supplied_config, galaxy_root, app_name="galaxy"):
@@ -36,7 +36,7 @@ def find_config(supplied_config, galaxy_root, app_name="galaxy"):
         return supplied_config
 
     if galaxy_root is None:
-        return os.path.abspath(f'{app_name}.yml')
+        return os.path.abspath(f"{app_name}.yml")
 
     # If not explicitly supplied an config, check galaxy.ini and then
     # just resort to sample if that has not been configured.
@@ -52,6 +52,7 @@ def find_config(supplied_config, galaxy_root, app_name="galaxy"):
 class WebappSetupProps(NamedTuple):
     """Basic properties to provide information about the App and the environment variables
     used to resolve the App configuration."""
+
     app_name: str
     default_section_name: str
     env_config_file: str
@@ -61,13 +62,13 @@ class WebappSetupProps(NamedTuple):
 
 class WebappConfig(NamedTuple):
     """The resolved configuration values for a Webapp."""
+
     global_conf: dict
     load_app_kwds: dict
     wsgi_preflight: bool = False
 
 
 class WebappConfigResolver:
-
     def __init__(self, props: WebappSetupProps) -> None:
         self.props = props
         self.app_kwds = get_app_kwds(props.default_section_name, props.app_name)

@@ -1,25 +1,18 @@
 """
 Condor helper utilities.
 """
-from subprocess import (
-    CalledProcessError,
-    check_call
-)
+from subprocess import CalledProcessError, check_call
 
-from galaxy.util import (
-    commands,
-    unicodify
-)
+from galaxy.util import commands, unicodify
 from ..external import parse_external_id
 
 DEFAULT_QUERY_CLASSAD = dict(
-    universe='vanilla',
-    getenv='true',
-    notification='NEVER',
+    universe="vanilla",
+    getenv="true",
+    notification="NEVER",
 )
 
-PROBLEM_PARSING_EXTERNAL_ID = \
-    "Failed to find job id from condor_submit"
+PROBLEM_PARSING_EXTERNAL_ID = "Failed to find job id from condor_submit"
 
 SUBMIT_PARAM_PREFIX = "submit_"
 
@@ -59,13 +52,13 @@ def build_submit_description(executable, output, error, user_log, query_params):
 
     submit_description = []
     for key, value in all_query_params.items():
-        submit_description.append(f'{key} = {value}')
+        submit_description.append(f"{key} = {value}")
     submit_description.append(f"executable = {executable}")
     submit_description.append(f"output = {output}")
     submit_description.append(f"error = {error}")
     submit_description.append(f"log = {user_log}")
-    submit_description.append('queue')
-    return '\n'.join(submit_description)
+    submit_description.append("queue")
+    return "\n".join(submit_description)
 
 
 def condor_submit(submit_file):
@@ -76,12 +69,12 @@ def condor_submit(submit_file):
     external_id = None
     failure_message = None
     try:
-        condor_message = commands.execute(('condor_submit', submit_file))
+        condor_message = commands.execute(("condor_submit", submit_file))
     except commands.CommandLineException as e:
         failure_message = unicodify(e)
     else:
         try:
-            external_id = parse_external_id(condor_message, type='condor')
+            external_id = parse_external_id(condor_message, type="condor")
         except Exception:
             failure_message = f"{PROBLEM_PARSING_EXTERNAL_ID}: {condor_message}"
     return external_id, failure_message
@@ -94,7 +87,7 @@ def condor_stop(external_id):
     """
     failure_message = None
     try:
-        check_call(('condor_rm', external_id))
+        check_call(("condor_rm", external_id))
     except CalledProcessError:
         failure_message = "condor_rm failed"
     except Exception as e:
@@ -103,8 +96,7 @@ def condor_stop(external_id):
 
 
 def summarize_condor_log(log_file, external_id):
-    """
-    """
+    """ """
     log_job_id = external_id.zfill(3)
     s1 = s4 = s7 = s5 = s9 = False
     with open(log_file) as log_handle:

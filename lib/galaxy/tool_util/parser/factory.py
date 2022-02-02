@@ -23,7 +23,7 @@ def build_xml_tool_source(xml_string):
 def build_cwl_tool_source(yaml_string):
     tool_proxy(tool_object=safe_load(yaml_string))
     # regular CwlToolSource sets basename as tool id, but that's not going to cut it in production
-    return CwlToolSource(tool_file=None, tool_id='serialized_cwl_tool', tool_proxy=tool_proxy)
+    return CwlToolSource(tool_file=None, tool_id="serialized_cwl_tool", tool_proxy=tool_proxy)
 
 
 def build_yaml_tool_source(yaml_string):
@@ -31,9 +31,9 @@ def build_yaml_tool_source(yaml_string):
 
 
 TOOL_SOURCE_FACTORIES = {
-    'XmlToolSource': build_xml_tool_source,
-    'YamlToolSource': build_yaml_tool_source,
-    'CwlToolSource': build_cwl_tool_source
+    "XmlToolSource": build_xml_tool_source,
+    "YamlToolSource": build_yaml_tool_source,
+    "CwlToolSource": build_cwl_tool_source,
 }
 
 
@@ -74,7 +74,9 @@ def get_tool_source(
             as_dict = ordered_load(f)
             return YamlToolSource(as_dict, source_path=config_file)
     elif config_file.endswith(".json") or config_file.endswith(".cwl"):
-        log.info("Loading CWL tool - this is experimental - tool likely will not function in future at least in same way.")
+        log.info(
+            "Loading CWL tool - this is experimental - tool likely will not function in future at least in same way."
+        )
         return CwlToolSource(config_file)
     else:
         tree, macro_paths = load_tool_with_refereces(config_file)
