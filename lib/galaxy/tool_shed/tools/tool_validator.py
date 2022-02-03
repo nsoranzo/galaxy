@@ -1,7 +1,10 @@
 import logging
 
 from galaxy.tool_shed.tools.data_table_manager import ShedToolDataTableManager
-from galaxy.tool_shed.util import basic_util, hg_util
+from galaxy.tool_shed.util import (
+    basic_util,
+    hg_util,
+)
 from galaxy.tool_util.fetcher import ToolLocationFetcher
 from galaxy.tools import (
     create_tool_from_source,

@@ -1,5 +1,8 @@
 from galaxy_test.base.uses_shed import UsesShed
-from .framework import selenium_test, SeleniumIntegrationTestCase
+from .framework import (
+    selenium_test,
+    SeleniumIntegrationTestCase,
+)
 
 
 class WorkflowEditorToolUpgradeWithToolShedToolTestCase(SeleniumIntegrationTestCase, UsesShed):

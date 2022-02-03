@@ -1,10 +1,25 @@
 from markupsafe import escape
-from sqlalchemy import desc, false, true
-from sqlalchemy.orm import eagerload, undefer
+from sqlalchemy import (
+    desc,
+    false,
+    true,
+)
+from sqlalchemy.orm import (
+    eagerload,
+    undefer,
+)
 
-from galaxy import exceptions, model, util, web
+from galaxy import (
+    exceptions,
+    model,
+    util,
+    web,
+)
 from galaxy.managers.hdas import HDAManager
-from galaxy.managers.histories import HistoryManager, HistorySerializer
+from galaxy.managers.histories import (
+    HistoryManager,
+    HistorySerializer,
+)
 from galaxy.managers.pages import (
     get_page_identifiers,
     PageContentProcessor,
@@ -16,8 +31,14 @@ from galaxy.model.item_attrs import UsesItemRatings
 from galaxy.structured_app import StructuredApp
 from galaxy.util import unicodify
 from galaxy.util.sanitize_html import sanitize_html
-from galaxy.web import error, url_for
-from galaxy.web.framework.helpers import grids, time_ago
+from galaxy.web import (
+    error,
+    url_for,
+)
+from galaxy.web.framework.helpers import (
+    grids,
+    time_ago,
+)
 from galaxy.webapps.base.controller import (
     BaseUIController,
     SharableMixin,

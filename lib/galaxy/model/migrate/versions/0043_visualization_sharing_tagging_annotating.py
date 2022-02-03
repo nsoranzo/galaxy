@@ -4,7 +4,17 @@ Migration script to create tables and columns for sharing visualizations.
 
 import logging
 
-from sqlalchemy import Boolean, Column, ForeignKey, Index, Integer, MetaData, Table, TEXT, Unicode
+from sqlalchemy import (
+    Boolean,
+    Column,
+    ForeignKey,
+    Index,
+    Integer,
+    MetaData,
+    Table,
+    TEXT,
+    Unicode,
+)
 
 from galaxy.model.migrate.versions.util import (
     add_column,

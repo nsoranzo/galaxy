@@ -26,7 +26,11 @@ from typing_extensions import Protocol
 
 from galaxy import util
 from galaxy.files import ConfiguredFileSources
-from galaxy.util import compression_utils, file_reader, stream_to_open_named_file
+from galaxy.util import (
+    compression_utils,
+    file_reader,
+    stream_to_open_named_file,
+)
 from galaxy.util.checkers import (
     check_binary,
     check_html,

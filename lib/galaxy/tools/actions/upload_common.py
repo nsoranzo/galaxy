@@ -5,8 +5,15 @@ import socket
 import tempfile
 from dataclasses import dataclass
 from io import StringIO
-from json import dump, dumps
-from typing import Dict, List, Optional
+from json import (
+    dump,
+    dumps,
+)
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 from urllib.parse import urlparse
 
 from sqlalchemy.orm import joinedload
@@ -25,7 +32,10 @@ from galaxy.model import (
     Role,
     tags,
 )
-from galaxy.util import is_url, unicodify
+from galaxy.util import (
+    is_url,
+    unicodify,
+)
 from galaxy.util.path import external_chown
 
 log = logging.getLogger(__name__)

@@ -9,7 +9,10 @@ from galaxy.datatypes.data import (
     Data,
     get_file_peek,
 )
-from galaxy.datatypes.interval import Bed, BedStrict
+from galaxy.datatypes.interval import (
+    Bed,
+    BedStrict,
+)
 from galaxy.util import galaxy_directory
 
 

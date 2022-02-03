@@ -9,14 +9,20 @@ import socket
 import string
 import time
 from http.cookies import CookieError
-from typing import Any, Dict
+from typing import (
+    Any,
+    Dict,
+)
 from urllib.parse import urlparse
 
 import mako.lookup
 import mako.runtime
 from babel import Locale
 from babel.support import Translations
-from sqlalchemy import and_, true
+from sqlalchemy import (
+    and_,
+    true,
+)
 from sqlalchemy.orm.exc import NoResultFound
 
 from galaxy import util
@@ -28,9 +34,17 @@ from galaxy.exceptions import (
 from galaxy.managers import context
 from galaxy.managers.session import GalaxySessionManager
 from galaxy.managers.users import UserManager
-from galaxy.util import asbool, safe_makedirs, unicodify
+from galaxy.util import (
+    asbool,
+    safe_makedirs,
+    unicodify,
+)
 from galaxy.util.sanitize_html import sanitize_html
-from galaxy.web.framework import base, helpers, url_for
+from galaxy.web.framework import (
+    base,
+    helpers,
+    url_for,
+)
 from galaxy.web_stack import get_app_kwds
 
 try:
@@ -1031,6 +1045,7 @@ def build_native_uwsgi_app(paste_factory, config_section):
 
 def build_url_map(app, global_conf, local_conf):
     from paste.urlmap import URLMap
+
     from galaxy.web.framework.middleware.static import CacheableStaticURLParser as Static
 
     urlmap = URLMap()

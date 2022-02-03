@@ -5,9 +5,21 @@ Migration script to add the data_manager_history_association table and data_mana
 import datetime
 import logging
 
-from sqlalchemy import Column, DateTime, ForeignKey, Index, Integer, MetaData, Table, TEXT
+from sqlalchemy import (
+    Column,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    MetaData,
+    Table,
+    TEXT,
+)
 
-from galaxy.model.migrate.versions.util import create_table, drop_table
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

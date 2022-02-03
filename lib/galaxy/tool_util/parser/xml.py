@@ -8,8 +8,15 @@ from typing import Optional
 import packaging.version
 
 from galaxy.tool_util.deps import requirements
-from galaxy.tool_util.parser.util import DEFAULT_DELTA, DEFAULT_DELTA_FRAC
-from galaxy.util import string_as_bool, xml_text, xml_to_string
+from galaxy.tool_util.parser.util import (
+    DEFAULT_DELTA,
+    DEFAULT_DELTA_FRAC,
+)
+from galaxy.util import (
+    string_as_bool,
+    xml_text,
+    xml_to_string,
+)
 from .interface import (
     InputSource,
     PageSource,
@@ -21,7 +28,12 @@ from .interface import (
 )
 from .output_actions import ToolOutputActionGroup
 from .output_collection_def import dataset_collector_descriptions_from_elem
-from .output_objects import ToolExpressionOutput, ToolOutput, ToolOutputCollection, ToolOutputCollectionStructure
+from .output_objects import (
+    ToolExpressionOutput,
+    ToolOutput,
+    ToolOutputCollection,
+    ToolOutputCollectionStructure,
+)
 from .stdio import (
     aggressive_error_checks,
     error_on_exit_code,
@@ -29,7 +41,6 @@ from .stdio import (
     ToolStdioExitCode,
     ToolStdioRegex,
 )
-
 
 log = logging.getLogger(__name__)
 

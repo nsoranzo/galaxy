@@ -8,7 +8,10 @@ import base64
 import logging
 import os
 
-from . import base, exceptions
+from . import (
+    base,
+    exceptions,
+)
 
 log = logging.getLogger(__name__)
 

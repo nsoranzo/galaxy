@@ -4,8 +4,14 @@ Contains the user interface in the Universe class
 
 from sqlalchemy import false
 
-from galaxy import util, web
-from galaxy.webapps.base.controller import BaseUIController, UsesFormDefinitionsMixin
+from galaxy import (
+    util,
+    web,
+)
+from galaxy.webapps.base.controller import (
+    BaseUIController,
+    UsesFormDefinitionsMixin,
+)
 
 
 class User(BaseUIController, UsesFormDefinitionsMixin):

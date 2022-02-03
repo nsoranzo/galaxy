@@ -7,14 +7,24 @@ through the library docs at https://whoosh.readthedocs.io.
 import logging
 import os
 import re
-from typing import Dict, List, Tuple, Union
+from typing import (
+    Dict,
+    List,
+    Tuple,
+    Union,
+)
 
 from whoosh import (
     analysis,
     index,
 )
 from whoosh.analysis import StandardAnalyzer
-from whoosh.fields import ID, KEYWORD, Schema, TEXT
+from whoosh.fields import (
+    ID,
+    KEYWORD,
+    Schema,
+    TEXT,
+)
 from whoosh.qparser import (
     MultifieldParser,
     OrGroup,

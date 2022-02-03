@@ -14,7 +14,10 @@ from galaxy.exceptions import (
     RequestParameterInvalidException,
     RequestParameterMissingException,
 )
-from galaxy.util import parse_non_hex_float, unicodify
+from galaxy.util import (
+    parse_non_hex_float,
+    unicodify,
+)
 from galaxy.util.json import safe_dumps
 from galaxy.web.framework import url_for
 

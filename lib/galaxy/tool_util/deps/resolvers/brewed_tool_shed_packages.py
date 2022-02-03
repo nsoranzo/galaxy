@@ -7,7 +7,10 @@ import logging
 import os
 
 from galaxy.util import parse_xml
-from . import DependencyResolver, NullDependency
+from . import (
+    DependencyResolver,
+    NullDependency,
+)
 from .resolver_mixins import (
     UsesHomebrewMixin,
     UsesInstalledRepositoriesMixin,

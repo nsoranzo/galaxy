@@ -14,11 +14,20 @@ from fastapi import (
     status,
 )
 
-from galaxy import exceptions, util, web
+from galaxy import (
+    exceptions,
+    util,
+    web,
+)
 from galaxy.managers.context import ProvidesUserContext
 from galaxy.model.item_attrs import UsesAnnotations
 from galaxy.schema.fields import EncodedDatabaseIdField
-from galaxy.schema.schema import SetSlugPayload, ShareWithPayload, ShareWithStatus, SharingStatus
+from galaxy.schema.schema import (
+    SetSlugPayload,
+    ShareWithPayload,
+    ShareWithStatus,
+    SharingStatus,
+)
 from galaxy.web import expose_api
 from galaxy.webapps.base.controller import UsesVisualizationMixin
 from galaxy.webapps.base.webapp import GalaxyWebTransaction

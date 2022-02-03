@@ -13,10 +13,25 @@ This migration script adds the following new tables for supporting Galaxy forms:
 import datetime
 import logging
 
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, MetaData, Table, TEXT
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Table,
+    TEXT,
+)
 
-from galaxy.model.custom_types import JSONType, TrimmedString
-from galaxy.model.migrate.versions.util import create_table, drop_table
+from galaxy.model.custom_types import (
+    JSONType,
+    TrimmedString,
+)
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

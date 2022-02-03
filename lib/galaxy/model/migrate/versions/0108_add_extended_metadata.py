@@ -4,10 +4,23 @@ Add the ExtendedMetadata and ExtendedMetadataIndex tables
 
 import logging
 
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, Table, TEXT
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    TEXT,
+)
 
 from galaxy.model.custom_types import JSONType
-from galaxy.model.migrate.versions.util import add_column, create_table, drop_column, drop_table
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    create_table,
+    drop_column,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

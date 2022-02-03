@@ -6,10 +6,26 @@ import datetime
 import logging
 from json import loads
 
-from sqlalchemy import Column, DateTime, ForeignKey, Index, Integer, MetaData, String, Table, TEXT
+from sqlalchemy import (
+    Column,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    TEXT,
+)
 
-from galaxy.model.custom_types import _sniffnfix_pg9_hex, TrimmedString
-from galaxy.model.migrate.versions.util import localtimestamp, nextval
+from galaxy.model.custom_types import (
+    _sniffnfix_pg9_hex,
+    TrimmedString,
+)
+from galaxy.model.migrate.versions.util import (
+    localtimestamp,
+    nextval,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

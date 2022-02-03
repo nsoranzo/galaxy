@@ -6,10 +6,23 @@ removes the state field in the request table
 import datetime
 import logging
 
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, MetaData, Table, TEXT
+from sqlalchemy import (
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Table,
+    TEXT,
+)
 
 from galaxy.model.custom_types import TrimmedString
-from galaxy.model.migrate.versions.util import create_table, drop_column, localtimestamp, nextval
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_column,
+    localtimestamp,
+    nextval,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

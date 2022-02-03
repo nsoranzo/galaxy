@@ -6,7 +6,13 @@ import tempfile
 from galaxy.tool_shed.tools.tool_validator import ToolValidator as GalaxyToolValidator
 from galaxy.tools import Tool
 from galaxy.util import unicodify
-from tool_shed.util import basic_util, hg_util, repository_util, tool_util, xml_util
+from tool_shed.util import (
+    basic_util,
+    hg_util,
+    repository_util,
+    tool_util,
+    xml_util,
+)
 
 log = logging.getLogger(__name__)
 

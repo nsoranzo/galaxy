@@ -7,12 +7,13 @@ import logging
 from webob.exc import HTTPNotFound
 
 from galaxy import web
-from galaxy.managers.histories import HistoryManager, HistorySerializer
+from galaxy.managers.histories import (
+    HistoryManager,
+    HistorySerializer,
+)
 from galaxy.model.item_attrs import UsesAnnotations
 from galaxy.structured_app import StructuredApp
-from galaxy.util import (
-    unicodify,
-)
+from galaxy.util import unicodify
 from galaxy.webapps.base import controller
 from ..api import depends
 

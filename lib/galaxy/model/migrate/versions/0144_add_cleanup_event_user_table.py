@@ -5,9 +5,19 @@ Migration script to add the cleanup_event_user_association table.
 import datetime
 import logging
 
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, MetaData, Table
+from sqlalchemy import (
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Table,
+)
 
-from galaxy.model.migrate.versions.util import create_table, drop_table
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_table,
+)
 
 now = datetime.datetime.utcnow
 log = logging.getLogger(__name__)

@@ -3,21 +3,36 @@ Contains the user interface in the Universe class
 """
 
 import logging
-from datetime import datetime, timedelta
+from datetime import (
+    datetime,
+    timedelta,
+)
 from urllib.parse import unquote
 
 from markupsafe import escape
 from sqlalchemy.orm.exc import NoResultFound
 
-from galaxy import util, web
+from galaxy import (
+    util,
+    web,
+)
 from galaxy.exceptions import Conflict
 from galaxy.managers import users
 from galaxy.queue_worker import send_local_control_task
-from galaxy.security.validate_user_input import validate_email, validate_publicname
+from galaxy.security.validate_user_input import (
+    validate_email,
+    validate_publicname,
+)
 from galaxy.structured_app import StructuredApp
-from galaxy.web import expose_api_anonymous_and_sessionless
-from galaxy.web import url_for
-from galaxy.webapps.base.controller import BaseUIController, CreatesApiKeysMixin, UsesFormDefinitionsMixin
+from galaxy.web import (
+    expose_api_anonymous_and_sessionless,
+    url_for,
+)
+from galaxy.webapps.base.controller import (
+    BaseUIController,
+    CreatesApiKeysMixin,
+    UsesFormDefinitionsMixin,
+)
 from ..api import depends
 
 log = logging.getLogger(__name__)

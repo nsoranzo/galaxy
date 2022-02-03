@@ -3,10 +3,11 @@ import sqlite3
 
 from sqlalchemy import or_
 
-
-from galaxy import exceptions, model
+from galaxy import (
+    exceptions,
+    model,
+)
 from galaxy.util.filelock import FileLock
-
 
 log = logging.getLogger(__name__)
 

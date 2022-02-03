@@ -11,7 +11,11 @@ from datetime import datetime
 import yaml
 
 from galaxy import model
-from galaxy.jobs.runners import AsynchronousJobRunner, AsynchronousJobState, JobState
+from galaxy.jobs.runners import (
+    AsynchronousJobRunner,
+    AsynchronousJobState,
+    JobState,
+)
 from galaxy.jobs.runners.util.pykube_util import (
     deduplicate_entries,
     DEFAULT_JOB_API_VERSION,

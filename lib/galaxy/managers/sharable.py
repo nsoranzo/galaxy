@@ -23,7 +23,14 @@ from sqlalchemy import (
 )
 
 from galaxy import exceptions
-from galaxy.managers import annotatable, base, ratable, secured, taggable, users
+from galaxy.managers import (
+    annotatable,
+    base,
+    ratable,
+    secured,
+    taggable,
+    users,
+)
 from galaxy.model import (
     User,
     UserShareAssociation,

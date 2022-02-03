@@ -3,8 +3,10 @@
 These are responsible for collecting and formatting a coherent set of metrics.
 """
 import os.path
-from abc import ABCMeta, abstractmethod
-
+from abc import (
+    ABCMeta,
+    abstractmethod,
+)
 
 from .. import formatting
 

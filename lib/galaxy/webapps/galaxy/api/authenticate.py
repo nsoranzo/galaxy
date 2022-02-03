@@ -20,7 +20,10 @@ from base64 import b64decode
 from urllib.parse import unquote
 
 from galaxy import exceptions
-from galaxy.util import smart_str, unicodify
+from galaxy.util import (
+    smart_str,
+    unicodify,
+)
 from galaxy.web import expose_api_anonymous_and_sessionless
 from galaxy.webapps.base.webapp import GalaxyWebTransaction
 from . import BaseGalaxyAPIController

@@ -1,13 +1,26 @@
 import logging
 
-from sqlalchemy import and_, false, func
+from sqlalchemy import (
+    and_,
+    false,
+    func,
+)
 
 import tool_shed.grids.repository_review_grids as repository_review_grids
 import tool_shed.grids.util as grids_util
-from galaxy import util, web
+from galaxy import (
+    util,
+    web,
+)
 from galaxy.web.form_builder import CheckboxField
 from galaxy.webapps.base.controller import BaseUIController
-from tool_shed.util import hg_util, metadata_util, repository_util, review_util, shed_util_common as suc
+from tool_shed.util import (
+    hg_util,
+    metadata_util,
+    repository_util,
+    review_util,
+)
+from tool_shed.util import shed_util_common as suc
 from tool_shed.util.container_util import STRSEP
 from tool_shed.util.web_util import escape
 from tool_shed.webapp.framework.decorators import require_login

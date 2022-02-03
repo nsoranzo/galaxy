@@ -1,11 +1,23 @@
 import logging
-from typing import Any, Dict, List, Union
+from typing import (
+    Any,
+    Dict,
+    List,
+    Union,
+)
 
-from sqlalchemy.orm import joinedload, Query
+from sqlalchemy.orm import (
+    joinedload,
+    Query,
+)
 
 from galaxy import model
 from galaxy.datatypes.registry import Registry
-from galaxy.exceptions import ItemAccessibilityException, MessageException, RequestParameterInvalidException
+from galaxy.exceptions import (
+    ItemAccessibilityException,
+    MessageException,
+    RequestParameterInvalidException,
+)
 from galaxy.managers.collections_util import validate_input_element_identifiers
 from galaxy.model.dataset_collections import builder
 from galaxy.model.dataset_collections.matching import MatchingCollections
@@ -21,7 +33,6 @@ from .hdas import (
 )
 from .histories import HistoryManager
 from .lddas import LDDAManager
-
 
 log = logging.getLogger(__name__)
 

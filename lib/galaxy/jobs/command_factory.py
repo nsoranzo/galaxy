@@ -1,6 +1,9 @@
 from logging import getLogger
 from os import getcwd
-from os.path import abspath, join
+from os.path import (
+    abspath,
+    join,
+)
 
 from galaxy import util
 from galaxy.jobs.runners.util.job_script import (

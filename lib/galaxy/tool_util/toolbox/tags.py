@@ -1,8 +1,10 @@
 """ Handle details of tool tagging - perhaps a deprecated feature.
 """
 import logging
-from abc import ABCMeta, abstractmethod
-
+from abc import (
+    ABCMeta,
+    abstractmethod,
+)
 
 log = logging.getLogger(__name__)
 

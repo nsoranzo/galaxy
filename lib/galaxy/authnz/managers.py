@@ -10,8 +10,10 @@ import requests
 from cloudauthz import CloudAuthz
 from cloudauthz.exceptions import CloudAuthzBaseException
 
-from galaxy import exceptions
-from galaxy import model
+from galaxy import (
+    exceptions,
+    model,
+)
 from galaxy.util import (
     asbool,
     etree,
@@ -24,8 +26,13 @@ from .custos_authnz import (
     CustosAuthnz,
     KEYCLOAK_BACKENDS,
 )
-from .psa_authnz import BACKENDS_NAME, on_the_fly_config, PSAAuthnz, Storage, Strategy
-
+from .psa_authnz import (
+    BACKENDS_NAME,
+    on_the_fly_config,
+    PSAAuthnz,
+    Storage,
+    Strategy,
+)
 
 log = logging.getLogger(__name__)
 

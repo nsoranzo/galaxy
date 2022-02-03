@@ -17,9 +17,8 @@ import os
 import sys
 from urllib.parse import urlencode
 
-import requests
-
 import parse_builds  # noqa: I100,I202
+import requests
 
 
 def getchrominfo(url, db):

@@ -8,8 +8,16 @@ import os
 import re
 from io import StringIO
 
-from galaxy.model import HistoryDatasetAssociation, HistoryDatasetCollectionAssociation, MetadataFile, User
-from galaxy.tools.wrappers import DatasetFilenameWrapper, DatasetListWrapper
+from galaxy.model import (
+    HistoryDatasetAssociation,
+    HistoryDatasetCollectionAssociation,
+    MetadataFile,
+    User,
+)
+from galaxy.tools.wrappers import (
+    DatasetFilenameWrapper,
+    DatasetListWrapper,
+)
 from galaxy.util import string_as_bool
 from . import validation
 

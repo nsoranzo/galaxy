@@ -12,12 +12,15 @@ except ImportError:
 
     docker = Bunch(errors=Bunch(NotFound=None))
 
-from galaxy.containers import Container, ContainerPort, ContainerVolume
+from galaxy.containers import (
+    Container,
+    ContainerPort,
+    ContainerVolume,
+)
 from galaxy.util import (
     pretty_print_time_interval,
     unicodify,
 )
-
 
 CPUS_LABEL = "_galaxy_cpus"
 IMAGE_LABEL = "_galaxy_image"

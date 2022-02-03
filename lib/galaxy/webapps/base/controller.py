@@ -2,14 +2,33 @@
 Contains functionality needed in every web interface
 """
 import logging
-from typing import Any, Optional
+from typing import (
+    Any,
+    Optional,
+)
 
 from sqlalchemy import true
-from webob.exc import HTTPBadRequest, HTTPInternalServerError, HTTPNotImplemented
+from webob.exc import (
+    HTTPBadRequest,
+    HTTPInternalServerError,
+    HTTPNotImplemented,
+)
 
-from galaxy import exceptions, model, security, util, web
+from galaxy import (
+    exceptions,
+    model,
+    security,
+    util,
+    web,
+)
 from galaxy.datatypes.interval import ChromatinInteractions
-from galaxy.managers import api_keys, base as managers_base, configuration, users, workflows
+from galaxy.managers import api_keys
+from galaxy.managers import base as managers_base
+from galaxy.managers import (
+    configuration,
+    users,
+    workflows,
+)
 from galaxy.managers.sharable import SlugBuilder
 from galaxy.model import (
     ExtendedMetadata,
@@ -21,8 +40,15 @@ from galaxy.model import (
 from galaxy.model.item_attrs import UsesAnnotations
 from galaxy.util.dictifiable import Dictifiable
 from galaxy.util.sanitize_html import sanitize_html
-from galaxy.web import error, url_for
-from galaxy.web.form_builder import AddressField, CheckboxField, PasswordField
+from galaxy.web import (
+    error,
+    url_for,
+)
+from galaxy.web.form_builder import (
+    AddressField,
+    CheckboxField,
+    PasswordField,
+)
 from galaxy.workflow.modules import WorkflowModuleInjector
 
 log = logging.getLogger(__name__)

@@ -4,9 +4,19 @@ Migration script to create tables for adding explicit workflow outputs.
 
 import logging
 
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, Table
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+    String,
+    Table,
+)
 
-from galaxy.model.migrate.versions.util import create_table, drop_table
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

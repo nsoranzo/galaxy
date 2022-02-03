@@ -3,7 +3,12 @@ import tempfile
 
 import pytest
 
-from galaxy.tool_util.lint import lint_tool_source_with, LintContext, XMLLintMessageLine, XMLLintMessageXPath
+from galaxy.tool_util.lint import (
+    lint_tool_source_with,
+    LintContext,
+    XMLLintMessageLine,
+    XMLLintMessageXPath,
+)
 from galaxy.tool_util.linters import (
     citations,
     command,

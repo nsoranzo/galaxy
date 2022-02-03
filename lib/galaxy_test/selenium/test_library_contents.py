@@ -2,7 +2,12 @@ import os
 
 from selenium.webdriver.support.ui import Select
 
-from .framework import retry_during_transitions, selenium_test, SeleniumTestCase, UsesLibraryAssertions
+from .framework import (
+    retry_during_transitions,
+    selenium_test,
+    SeleniumTestCase,
+    UsesLibraryAssertions,
+)
 
 
 class LibraryContentsTestCase(SeleniumTestCase, UsesLibraryAssertions):

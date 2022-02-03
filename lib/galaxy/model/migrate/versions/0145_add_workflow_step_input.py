@@ -17,7 +17,11 @@ from sqlalchemy import (
 )
 
 from galaxy.model.custom_types import JSONType
-from galaxy.model.migrate.versions.util import create_table, drop_index, drop_table
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_index,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

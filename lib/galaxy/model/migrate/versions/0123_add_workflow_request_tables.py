@@ -4,10 +4,28 @@ Migration script for workflow request tables.
 
 import logging
 
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, Table, TEXT, Unicode
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    TEXT,
+    Unicode,
+)
 
-from galaxy.model.custom_types import JSONType, TrimmedString, UUIDType
-from galaxy.model.migrate.versions.util import add_column, create_table, drop_column, drop_table
+from galaxy.model.custom_types import (
+    JSONType,
+    TrimmedString,
+    UUIDType,
+)
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    create_table,
+    drop_column,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

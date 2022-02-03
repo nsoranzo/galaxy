@@ -1,8 +1,6 @@
 from typing import Optional
 
-from fastapi import (
-    Path,
-)
+from fastapi import Path
 from fastapi.responses import FileResponse
 
 from galaxy import web
@@ -18,7 +16,11 @@ from galaxy.web import (
     expose_api,
     expose_api_raw,
 )
-from . import BaseGalaxyAPIController, depends, Router
+from . import (
+    BaseGalaxyAPIController,
+    depends,
+    Router,
+)
 
 router = Router(tags=["tool data tables"])
 

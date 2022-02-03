@@ -6,9 +6,20 @@ from unittest import mock
 import sqlalchemy
 from sqlalchemy import true
 
-from galaxy import exceptions, model
-from galaxy.managers import base, hdas
-from galaxy.managers.histories import HistoryDeserializer, HistoryFilters, HistoryManager, HistorySerializer
+from galaxy import (
+    exceptions,
+    model,
+)
+from galaxy.managers import (
+    base,
+    hdas,
+)
+from galaxy.managers.histories import (
+    HistoryDeserializer,
+    HistoryFilters,
+    HistoryManager,
+    HistorySerializer,
+)
 from .base import BaseTestCase
 
 default_password = "123456"

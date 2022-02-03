@@ -8,7 +8,10 @@ from xml.sax.saxutils import escape
 
 from galaxy.util import RW_R__R__
 from galaxy.util.renamed_temporary_file import RenamedTemporaryFile
-from .panel import panel_item_types, ToolPanelElements
+from .panel import (
+    panel_item_types,
+    ToolPanelElements,
+)
 
 log = logging.getLogger(__name__)
 

@@ -4,10 +4,19 @@ Migration script to drop the update_available Boolean column and replace it with
 
 import logging
 
-from sqlalchemy import Boolean, Column, MetaData, Table
+from sqlalchemy import (
+    Boolean,
+    Column,
+    MetaData,
+    Table,
+)
 
 from galaxy.model.custom_types import JSONType
-from galaxy.model.migrate.versions.util import add_column, drop_column, engine_false
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+    engine_false,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

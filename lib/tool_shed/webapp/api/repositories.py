@@ -6,10 +6,16 @@ from collections import namedtuple
 from io import StringIO
 from time import strftime
 
-from sqlalchemy import and_, false
+from sqlalchemy import (
+    and_,
+    false,
+)
 from webob.compat import cgi_FieldStorage
 
-from galaxy import util, web
+from galaxy import (
+    util,
+    web,
+)
 from galaxy.exceptions import (
     ActionInputError,
     ConfigDoesNotAllowException,
@@ -19,8 +25,15 @@ from galaxy.exceptions import (
     RequestParameterMissingException,
 )
 from galaxy.util import checkers
-from galaxy.web import expose_api, expose_api_anonymous_and_sessionless, expose_api_raw_anonymous_and_sessionless
-from galaxy.webapps.base.controller import BaseAPIController, HTTPBadRequest
+from galaxy.web import (
+    expose_api,
+    expose_api_anonymous_and_sessionless,
+    expose_api_raw_anonymous_and_sessionless,
+)
+from galaxy.webapps.base.controller import (
+    BaseAPIController,
+    HTTPBadRequest,
+)
 from tool_shed.dependencies import attribute_handlers
 from tool_shed.metadata import repository_metadata_manager
 from tool_shed.repository_types import util as rt_util

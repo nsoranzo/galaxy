@@ -2,13 +2,22 @@ import logging
 import os.path
 import sys
 
-from migrate.versioning import repository, schema
-from sqlalchemy import create_engine, MetaData, Table
+from migrate.versioning import (
+    repository,
+    schema,
+)
+from sqlalchemy import (
+    create_engine,
+    MetaData,
+    Table,
+)
 from sqlalchemy.exc import NoSuchTableError
 
-from galaxy.model.database_utils import create_database, database_exists
+from galaxy.model.database_utils import (
+    create_database,
+    database_exists,
+)
 from galaxy.model.tool_shed_install import mapping
-
 
 log = logging.getLogger(__name__)
 

@@ -6,7 +6,10 @@ import subprocess
 import sys as _sys
 import tempfile
 
-from galaxy.util import unicodify, which
+from galaxy.util import (
+    unicodify,
+    which,
+)
 
 log = logging.getLogger(__name__)
 

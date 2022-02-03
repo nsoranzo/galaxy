@@ -4,9 +4,21 @@ Migration script to (a) create tables for annotating objects and (b) create tags
 
 import logging
 
-from sqlalchemy import Column, ForeignKey, Index, Integer, MetaData, Table, TEXT, Unicode
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Index,
+    Integer,
+    MetaData,
+    Table,
+    TEXT,
+    Unicode,
+)
 
-from galaxy.model.migrate.versions.util import create_table, drop_table
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

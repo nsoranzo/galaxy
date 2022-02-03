@@ -18,14 +18,20 @@ from galaxy import util
 from galaxy.datatypes import metadata
 from galaxy.datatypes.binary import Binary
 from galaxy.datatypes.data import DatatypeValidation
-from galaxy.datatypes.metadata import DictParameter, MetadataElement
+from galaxy.datatypes.metadata import (
+    DictParameter,
+    MetadataElement,
+)
 from galaxy.datatypes.sniff import (
     build_sniff_from_prefix,
     FilePrefix,
     get_headers,
     iter_headers,
 )
-from galaxy.util import compression_utils, nice_size
+from galaxy.util import (
+    compression_utils,
+    nice_size,
+)
 from galaxy.util.checkers import is_gzip
 from galaxy.util.image_util import check_image_type
 from . import data

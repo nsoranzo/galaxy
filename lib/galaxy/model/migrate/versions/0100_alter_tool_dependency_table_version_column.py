@@ -4,7 +4,10 @@ Migration script to alter the type of the tool_dependency.version column from Tr
 
 import logging
 
-from sqlalchemy import MetaData, Table
+from sqlalchemy import (
+    MetaData,
+    Table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

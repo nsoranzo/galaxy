@@ -3,8 +3,15 @@ import itertools
 import logging
 from collections import namedtuple
 
-from galaxy import exceptions, model, util
-from galaxy.model.dataset_collections import matching, subcollections
+from galaxy import (
+    exceptions,
+    model,
+    util,
+)
+from galaxy.model.dataset_collections import (
+    matching,
+    subcollections,
+)
 from galaxy.util import permutations
 from . import visit_input_values
 

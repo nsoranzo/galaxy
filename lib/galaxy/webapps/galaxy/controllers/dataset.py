@@ -8,21 +8,45 @@ from urllib.parse import (
 import paste.httpexceptions
 from markupsafe import escape
 
-from galaxy import datatypes, model, util, web
+from galaxy import (
+    datatypes,
+    model,
+    util,
+    web,
+)
 from galaxy.datatypes import sniff
 from galaxy.datatypes.data import DatatypeConverterNotFoundException
-from galaxy.datatypes.display_applications.util import decode_dataset_user, encode_dataset_user
+from galaxy.datatypes.display_applications.util import (
+    decode_dataset_user,
+    encode_dataset_user,
+)
 from galaxy.exceptions import RequestParameterInvalidException
-from galaxy.managers.hdas import HDADeserializer, HDAManager
+from galaxy.managers.hdas import (
+    HDADeserializer,
+    HDAManager,
+)
 from galaxy.managers.histories import HistoryManager
-from galaxy.model.item_attrs import UsesAnnotations, UsesItemRatings
+from galaxy.model.item_attrs import (
+    UsesAnnotations,
+    UsesItemRatings,
+)
 from galaxy.structured_app import StructuredApp
-from galaxy.util import inflector, sanitize_text, smart_str
+from galaxy.util import (
+    inflector,
+    sanitize_text,
+    smart_str,
+)
 from galaxy.util.checkers import check_binary
 from galaxy.util.sanitize_html import sanitize_html
 from galaxy.web import form_builder
 from galaxy.web.framework.helpers import iff
-from galaxy.webapps.base.controller import BaseUIController, ERROR, SUCCESS, url_for, UsesExtendedMetadataMixin
+from galaxy.webapps.base.controller import (
+    BaseUIController,
+    ERROR,
+    SUCCESS,
+    url_for,
+    UsesExtendedMetadataMixin,
+)
 from ..api import depends
 
 log = logging.getLogger(__name__)

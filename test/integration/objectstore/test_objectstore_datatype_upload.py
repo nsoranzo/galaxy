@@ -8,7 +8,11 @@ from typing import Optional
 import pytest
 
 from galaxy_test.driver import integration_util
-from ..test_datatype_upload import TEST_CASES, upload_datatype_helper, UploadTestDatatypeDataTestCase
+from ..test_datatype_upload import (
+    TEST_CASES,
+    upload_datatype_helper,
+    UploadTestDatatypeDataTestCase,
+)
 
 SCRIPT_DIRECTORY = os.path.abspath(os.path.dirname(__file__))
 IRODS_OBJECT_STORE_HOST = os.environ.get("GALAXY_INTEGRATION_IRODS_OBJECT_STORE_HOST", "localhost")

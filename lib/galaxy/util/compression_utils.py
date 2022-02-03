@@ -21,7 +21,10 @@ from typing import (
 from typing_extensions import Literal
 
 from galaxy.util.path import safe_relpath
-from .checkers import is_bz2, is_gzip
+from .checkers import (
+    is_bz2,
+    is_gzip,
+)
 
 log = logging.getLogger(__name__)
 

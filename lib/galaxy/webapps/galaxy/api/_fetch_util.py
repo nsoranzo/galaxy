@@ -14,9 +14,7 @@ from galaxy.tools.actions.upload_common import (
     validate_datatype_extension,
     validate_url,
 )
-from galaxy.util import (
-    relpath,
-)
+from galaxy.util import relpath
 
 log = logging.getLogger(__name__)
 

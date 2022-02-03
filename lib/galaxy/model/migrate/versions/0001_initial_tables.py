@@ -1,10 +1,25 @@
 import datetime
 import logging
 
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, MetaData, Numeric, String, Table, TEXT
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Numeric,
+    String,
+    Table,
+    TEXT,
+)
 
 # Need our custom types, but don't import anything else from model
-from galaxy.model.custom_types import JSONType, MetadataType, TrimmedString
+from galaxy.model.custom_types import (
+    JSONType,
+    MetadataType,
+    TrimmedString,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

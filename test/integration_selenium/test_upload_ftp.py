@@ -1,6 +1,9 @@
 import os
 
-from .framework import selenium_test, SeleniumIntegrationTestCase
+from .framework import (
+    selenium_test,
+    SeleniumIntegrationTestCase,
+)
 
 
 class UploadFtpSeleniumIntegrationTestCase(SeleniumIntegrationTestCase):

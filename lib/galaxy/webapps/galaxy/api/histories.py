@@ -62,7 +62,14 @@ from galaxy.webapps.galaxy.api.common import (
     query_serialization_params,
 )
 from galaxy.webapps.galaxy.services.histories import HistoriesService
-from . import as_form, BaseGalaxyAPIController, depends, DependsOnTrans, Router, try_get_request_body_as_json
+from . import (
+    as_form,
+    BaseGalaxyAPIController,
+    depends,
+    DependsOnTrans,
+    Router,
+    try_get_request_body_as_json,
+)
 
 log = logging.getLogger(__name__)
 

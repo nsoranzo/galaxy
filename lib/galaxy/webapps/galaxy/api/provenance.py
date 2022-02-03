@@ -3,11 +3,17 @@ API operations provenance
 """
 import logging
 
-from paste.httpexceptions import HTTPBadRequest, HTTPNotImplemented
+from paste.httpexceptions import (
+    HTTPBadRequest,
+    HTTPNotImplemented,
+)
 
 from galaxy import web
 from galaxy.managers.hdas import HDAManager
-from . import BaseGalaxyAPIController, depends
+from . import (
+    BaseGalaxyAPIController,
+    depends,
+)
 
 log = logging.getLogger(__name__)
 

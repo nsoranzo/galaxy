@@ -1,5 +1,8 @@
 """This module contains a linting functions for tool tests."""
-from inspect import Parameter, signature
+from inspect import (
+    Parameter,
+    signature,
+)
 
 from ._util import is_datasource
 from ..verify import asserts

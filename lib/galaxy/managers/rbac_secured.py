@@ -1,7 +1,10 @@
 import logging
 
 import galaxy.exceptions
-from galaxy import model, security
+from galaxy import (
+    model,
+    security,
+)
 from galaxy.managers import users
 
 log = logging.getLogger(__name__)

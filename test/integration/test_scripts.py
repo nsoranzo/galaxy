@@ -9,7 +9,10 @@ import unittest
 
 import yaml
 
-from galaxy.util import galaxy_directory, unicodify
+from galaxy.util import (
+    galaxy_directory,
+    unicodify,
+)
 from galaxy_test.base.populators import DatasetPopulator
 from galaxy_test.driver import integration_util
 

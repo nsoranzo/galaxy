@@ -6,9 +6,17 @@ import logging
 import os
 import shlex
 from functools import partial
-from itertools import cycle, repeat
+from itertools import (
+    cycle,
+    repeat,
+)
 from time import sleep
-from typing import Any, Dict, Optional, Type
+from typing import (
+    Any,
+    Dict,
+    Optional,
+    Type,
+)
 
 try:
     import docker
@@ -16,15 +24,31 @@ except ImportError:
     docker = None  # type: ignore[assignment]
 
 try:
-    from requests.exceptions import ConnectionError, ReadTimeout
+    from requests.exceptions import (
+        ConnectionError,
+        ReadTimeout,
+    )
 except ImportError:
     ConnectionError = None  # type: ignore[assignment,misc]
     ReadTimeout = None  # type: ignore[assignment,misc]
 
-from galaxy.containers import Container, ContainerInterface
-from galaxy.containers.docker_decorators import docker_columns, docker_json
-from galaxy.containers.docker_model import DockerContainer, DockerVolume
-from galaxy.exceptions import ContainerCLIError, ContainerImageNotFound, ContainerNotFound
+from galaxy.containers import (
+    Container,
+    ContainerInterface,
+)
+from galaxy.containers.docker_decorators import (
+    docker_columns,
+    docker_json,
+)
+from galaxy.containers.docker_model import (
+    DockerContainer,
+    DockerVolume,
+)
+from galaxy.exceptions import (
+    ContainerCLIError,
+    ContainerImageNotFound,
+    ContainerNotFound,
+)
 from galaxy.util.json import safe_dumps_formatted
 
 log = logging.getLogger(__name__)

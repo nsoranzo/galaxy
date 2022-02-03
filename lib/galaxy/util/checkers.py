@@ -4,7 +4,10 @@ import os
 import re
 import tarfile
 import zipfile
-from io import BytesIO, StringIO
+from io import (
+    BytesIO,
+    StringIO,
+)
 from typing import (
     IO,
     List,

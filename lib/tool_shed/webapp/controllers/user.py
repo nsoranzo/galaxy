@@ -4,8 +4,15 @@ import socket
 from markupsafe import escape
 from sqlalchemy import func
 
-from galaxy import util, web
-from galaxy.security.validate_user_input import validate_email, validate_password, validate_publicname
+from galaxy import (
+    util,
+    web,
+)
+from galaxy.security.validate_user_input import (
+    validate_email,
+    validate_password,
+    validate_publicname,
+)
 from galaxy.web import url_for
 from galaxy.web.form_builder import CheckboxField
 from galaxy.webapps.galaxy.controllers.user import User as BaseUser

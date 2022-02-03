@@ -2,14 +2,20 @@ import json
 import logging
 from time import strftime
 
-from paste.httpexceptions import HTTPBadRequest, HTTPForbidden
+from paste.httpexceptions import (
+    HTTPBadRequest,
+    HTTPForbidden,
+)
 from sqlalchemy import (
     and_,
     cast,
     Integer,
 )
 
-from galaxy import exceptions, util
+from galaxy import (
+    exceptions,
+    util,
+)
 from galaxy.managers.context import ProvidesUserContext
 from galaxy.model.tool_shed_install import ToolShedRepository
 from galaxy.tool_shed.galaxy_install.install_manager import InstallRepositoryManager
@@ -25,9 +31,12 @@ from galaxy.tool_shed.util.repository_util import (
 )
 from galaxy.tool_shed.util.shed_util_common import have_shed_tool_conf_for_install
 from galaxy.tool_shed.util.tool_util import generate_message_for_invalid_tools
-from galaxy.web import expose_api, require_admin, url_for
+from galaxy.web import (
+    expose_api,
+    require_admin,
+    url_for,
+)
 from . import BaseGalaxyAPIController
-
 
 log = logging.getLogger(__name__)
 

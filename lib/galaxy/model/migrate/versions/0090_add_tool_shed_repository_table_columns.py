@@ -4,9 +4,18 @@ Migration script to add the uninstalled and dist_to_shed columns to the tool_she
 
 import logging
 
-from sqlalchemy import Boolean, Column, MetaData, Table
+from sqlalchemy import (
+    Boolean,
+    Column,
+    MetaData,
+    Table,
+)
 
-from galaxy.model.migrate.versions.util import add_column, drop_column, engine_false
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+    engine_false,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

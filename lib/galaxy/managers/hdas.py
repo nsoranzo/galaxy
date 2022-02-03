@@ -7,11 +7,19 @@ history.
 import gettext
 import logging
 import os
-from typing import Any, Dict, List
+from typing import (
+    Any,
+    Dict,
+    List,
+)
 
 from sqlalchemy.orm.session import object_session
 
-from galaxy import datatypes, exceptions, model
+from galaxy import (
+    datatypes,
+    exceptions,
+    model,
+)
 from galaxy.managers import (
     annotatable,
     base,
@@ -21,7 +29,10 @@ from galaxy.managers import (
     users,
 )
 from galaxy.model.tags import GalaxyTagHandler
-from galaxy.structured_app import MinimalManagerApp, StructuredApp
+from galaxy.structured_app import (
+    MinimalManagerApp,
+    StructuredApp,
+)
 
 log = logging.getLogger(__name__)
 

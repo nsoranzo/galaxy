@@ -3,7 +3,10 @@ import os
 from galaxy.tool_shed.galaxy_install.tools import tool_panel_manager
 from galaxy.util import parse_xml
 from tool_shed.tools import tool_version_manager
-from ..app.tools.test_toolbox import BaseToolBoxTestCase, SimplifiedToolBox
+from ..app.tools.test_toolbox import (
+    BaseToolBoxTestCase,
+    SimplifiedToolBox,
+)
 
 DEFAULT_GUID = "123456"
 

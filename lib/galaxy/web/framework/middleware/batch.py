@@ -29,7 +29,10 @@ from urllib.parse import urlparse
 import routes
 import webob.exc
 
-from galaxy.util import smart_str, unicodify
+from galaxy.util import (
+    smart_str,
+    unicodify,
+)
 
 log = logging.getLogger(__name__)
 

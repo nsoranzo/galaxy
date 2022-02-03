@@ -3,7 +3,10 @@
 
 
 import logging
-from abc import ABCMeta, abstractmethod
+from abc import (
+    ABCMeta,
+    abstractmethod,
+)
 from typing import Dict
 
 import requests

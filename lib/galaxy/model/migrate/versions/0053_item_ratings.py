@@ -4,9 +4,19 @@ Migration script to create tables for rating histories, datasets, workflows, pag
 
 import logging
 
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Table,
+)
 
-from galaxy.model.migrate.versions.util import add_index, create_table, drop_table
+from galaxy.model.migrate.versions.util import (
+    add_index,
+    create_table,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

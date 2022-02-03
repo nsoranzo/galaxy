@@ -1,7 +1,10 @@
 """
 Abstract base class for cli job plugins.
 """
-from abc import ABCMeta, abstractmethod
+from abc import (
+    ABCMeta,
+    abstractmethod,
+)
 from enum import Enum
 
 try:

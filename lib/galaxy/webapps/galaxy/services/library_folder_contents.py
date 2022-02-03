@@ -1,6 +1,9 @@
 import logging
 
-from galaxy import exceptions, util
+from galaxy import (
+    exceptions,
+    util,
+)
 from galaxy.managers import base as managers_base
 from galaxy.managers.folders import FolderManager
 from galaxy.managers.hdas import HDAManager

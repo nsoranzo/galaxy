@@ -3,7 +3,11 @@ import logging
 from typing import List
 
 from pkg_resources import resource_string
-from pydantic import BaseModel, Field, HttpUrl
+from pydantic import (
+    BaseModel,
+    Field,
+    HttpUrl,
+)
 
 from galaxy import exceptions
 

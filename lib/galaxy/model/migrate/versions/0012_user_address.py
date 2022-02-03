@@ -8,10 +8,23 @@ which is a string, allowing for more flexibility with request states.
 import datetime
 import logging
 
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Integer, MetaData, Table, TEXT
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Table,
+    TEXT,
+)
 
 from galaxy.model.custom_types import TrimmedString
-from galaxy.model.migrate.versions.util import add_column, create_table, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    create_table,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

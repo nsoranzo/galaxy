@@ -1,6 +1,9 @@
 import logging
 import uuid
-from typing import List, Union
+from typing import (
+    List,
+    Union,
+)
 
 from galaxy import model
 from galaxy.util import ExecutionTimer

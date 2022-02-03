@@ -19,8 +19,14 @@ from sqlalchemy import (
     desc,
 )
 
-from galaxy import exceptions as glx_exceptions, model
-from galaxy.managers import deletable, hdas, history_contents, sharable
+from galaxy import exceptions as glx_exceptions
+from galaxy import model
+from galaxy.managers import (
+    deletable,
+    hdas,
+    history_contents,
+    sharable,
+)
 from galaxy.managers.base import (
     Serializer,
     SortableManager,

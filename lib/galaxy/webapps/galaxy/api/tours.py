@@ -8,7 +8,11 @@ from galaxy.tours import (
     TourList,
     ToursRegistry,
 )
-from galaxy.web import expose_api, expose_api_anonymous_and_sessionless, require_admin
+from galaxy.web import (
+    expose_api,
+    expose_api_anonymous_and_sessionless,
+    require_admin,
+)
 from . import (
     BaseGalaxyAPIController,
     depends,

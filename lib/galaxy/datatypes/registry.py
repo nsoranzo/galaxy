@@ -6,14 +6,32 @@ import imp
 import logging
 import os
 from string import Template
-from typing import Dict, List, Optional, Tuple, TYPE_CHECKING
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Tuple,
+    TYPE_CHECKING,
+)
 
 import yaml
 
 import galaxy.util
 from galaxy.util import RW_R__R__
 from galaxy.util.bunch import Bunch
-from . import binary, coverage, data, images, interval, qualityscore, sequence, tabular, text, tracks, xml
+from . import (
+    binary,
+    coverage,
+    data,
+    images,
+    interval,
+    qualityscore,
+    sequence,
+    tabular,
+    text,
+    tracks,
+    xml,
+)
 from .display_applications.application import DisplayApplication
 
 if TYPE_CHECKING:

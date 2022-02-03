@@ -1,4 +1,7 @@
-from fastapi import FastAPI, Request
+from fastapi import (
+    FastAPI,
+    Request,
+)
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.responses import Response
@@ -11,7 +14,10 @@ except ImportError:
 
 from galaxy.exceptions import MessageException
 from galaxy.web.framework.base import walk_controller_modules
-from galaxy.web.framework.decorators import api_error_message, validation_error_to_message_exception
+from galaxy.web.framework.decorators import (
+    api_error_message,
+    validation_error_to_message_exception,
+)
 
 
 def add_exception_handler(app: FastAPI) -> None:

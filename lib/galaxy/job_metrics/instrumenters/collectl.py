@@ -6,7 +6,11 @@ import shutil
 from galaxy import util
 from . import InstrumentPlugin
 from .. import formatting
-from ..collectl import cli, processes, subsystems
+from ..collectl import (
+    cli,
+    processes,
+    subsystems,
+)
 
 log = logging.getLogger(__name__)
 

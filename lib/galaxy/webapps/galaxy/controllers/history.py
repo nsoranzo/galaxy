@@ -1,19 +1,45 @@
 import logging
 
 from markupsafe import escape
-from sqlalchemy import false, null, true
-from sqlalchemy.orm import eagerload, joinedload, undefer
+from sqlalchemy import (
+    false,
+    null,
+    true,
+)
+from sqlalchemy.orm import (
+    eagerload,
+    joinedload,
+    undefer,
+)
 
-from galaxy import exceptions
-from galaxy import model
-from galaxy import web
+from galaxy import (
+    exceptions,
+    model,
+    web,
+)
 from galaxy.managers import histories
 from galaxy.managers.sharable import SlugBuilder
-from galaxy.model.item_attrs import UsesAnnotations, UsesItemRatings
+from galaxy.model.item_attrs import (
+    UsesAnnotations,
+    UsesItemRatings,
+)
 from galaxy.structured_app import StructuredApp
-from galaxy.util import listify, parse_int, sanitize_text, string_as_bool, unicodify
-from galaxy.web import expose_api_anonymous, url_for
-from galaxy.web.framework.helpers import grids, iff, time_ago
+from galaxy.util import (
+    listify,
+    parse_int,
+    sanitize_text,
+    string_as_bool,
+    unicodify,
+)
+from galaxy.web import (
+    expose_api_anonymous,
+    url_for,
+)
+from galaxy.web.framework.helpers import (
+    grids,
+    iff,
+    time_ago,
+)
 from galaxy.webapps.base.controller import (
     BaseUIController,
     ERROR,
@@ -24,7 +50,6 @@ from galaxy.webapps.base.controller import (
 )
 from ._create_history_template import render_item
 from ..api import depends
-
 
 log = logging.getLogger(__name__)
 

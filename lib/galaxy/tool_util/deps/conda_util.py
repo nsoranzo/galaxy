@@ -11,7 +11,11 @@ import tempfile
 
 import packaging.version
 
-from galaxy.util import commands, smart_str, unicodify
+from galaxy.util import (
+    commands,
+    smart_str,
+    unicodify,
+)
 from . import installable
 
 log = logging.getLogger(__name__)

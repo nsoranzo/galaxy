@@ -3,7 +3,10 @@ Manager and Serializer for Library Folders.
 """
 import logging
 
-from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
+from sqlalchemy.orm.exc import (
+    MultipleResultsFound,
+    NoResultFound,
+)
 
 from galaxy import util
 from galaxy.exceptions import (

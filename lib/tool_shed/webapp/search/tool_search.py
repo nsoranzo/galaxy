@@ -4,7 +4,11 @@ import os
 
 import whoosh.index
 from whoosh import scoring
-from whoosh.fields import Schema, STORED, TEXT
+from whoosh.fields import (
+    Schema,
+    STORED,
+    TEXT,
+)
 from whoosh.qparser import MultifieldParser
 
 from galaxy import exceptions

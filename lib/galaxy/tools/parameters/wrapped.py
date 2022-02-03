@@ -1,5 +1,13 @@
-from galaxy.tools.parameters.basic import DataCollectionToolParameter, DataToolParameter, SelectToolParameter
-from galaxy.tools.parameters.grouping import Conditional, Repeat, Section
+from galaxy.tools.parameters.basic import (
+    DataCollectionToolParameter,
+    DataToolParameter,
+    SelectToolParameter,
+)
+from galaxy.tools.parameters.grouping import (
+    Conditional,
+    Repeat,
+    Section,
+)
 from galaxy.tools.wrappers import (
     DatasetCollectionWrapper,
     DatasetFilenameWrapper,

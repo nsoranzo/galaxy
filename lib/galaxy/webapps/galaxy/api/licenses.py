@@ -2,7 +2,10 @@ from typing import List
 
 from fastapi import Path
 
-from galaxy.managers.licenses import LicenseMetadataModel, LicensesManager
+from galaxy.managers.licenses import (
+    LicenseMetadataModel,
+    LicensesManager,
+)
 from galaxy.web import expose_api_anonymous_and_sessionless
 from . import (
     BaseGalaxyAPIController,

@@ -4,7 +4,11 @@ Migration script to add a notify column to the request table.
 
 import logging
 
-from sqlalchemy import Boolean, Column, MetaData
+from sqlalchemy import (
+    Boolean,
+    Column,
+    MetaData,
+)
 
 from galaxy.model.migrate.versions.util import (
     add_column,

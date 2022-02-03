@@ -4,10 +4,16 @@ Migration script to add the installed_changeset_revision column to the tool_shed
 
 import logging
 
-from sqlalchemy import Column, MetaData
+from sqlalchemy import (
+    Column,
+    MetaData,
+)
 
 from galaxy.model.custom_types import TrimmedString
-from galaxy.model.migrate.versions.util import add_column, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

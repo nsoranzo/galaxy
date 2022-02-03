@@ -7,7 +7,6 @@ from .framework import (
     SeleniumTestCase,
 )
 
-
 NEW_HISTORY_NAME = "New History Name"
 
 

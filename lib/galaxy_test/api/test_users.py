@@ -1,6 +1,10 @@
 import json
 
-from requests import delete, get, put
+from requests import (
+    delete,
+    get,
+    put,
+)
 
 from galaxy_test.base.api_asserts import assert_object_id_error
 from galaxy_test.base.populators import skip_without_tool

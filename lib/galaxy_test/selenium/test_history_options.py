@@ -1,4 +1,7 @@
-from .framework import selenium_test, SeleniumTestCase
+from .framework import (
+    selenium_test,
+    SeleniumTestCase,
+)
 
 
 class HistoryOptionsTestCase(SeleniumTestCase):

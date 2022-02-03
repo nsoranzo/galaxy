@@ -34,7 +34,11 @@ import signal
 import time
 
 from galaxy.jobs.runners.drmaa import DRMAAJobRunner
-from galaxy.util import commands, size_to_bytes, unicodify
+from galaxy.util import (
+    commands,
+    size_to_bytes,
+    unicodify,
+)
 
 log = logging.getLogger(__name__)
 

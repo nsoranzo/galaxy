@@ -5,7 +5,10 @@ import string
 import time
 from collections import namedtuple
 from errno import ENOENT
-from typing import Dict, List
+from typing import (
+    Dict,
+    List,
+)
 from urllib.parse import urlparse
 
 from markupsafe import escape
@@ -16,7 +19,10 @@ from galaxy.exceptions import (
     ObjectNotFound,
     RequestParameterInvalidException,
 )
-from galaxy.tool_util.deps import build_dependency_manager, NullDependencyManager
+from galaxy.tool_util.deps import (
+    build_dependency_manager,
+    NullDependencyManager,
+)
 from galaxy.tool_util.loader_directory import looks_like_a_tool
 from galaxy.util import (
     etree,
@@ -31,10 +37,21 @@ from galaxy.util.dictifiable import Dictifiable
 from .filters import FilterFactory
 from .integrated_panel import ManagesIntegratedToolPanelMixin
 from .lineages import LineageMap
-from .panel import panel_item_types, ToolPanelElements, ToolSection, ToolSectionLabel
-from .parser import ensure_tool_conf_item, get_toolbox_parser
+from .panel import (
+    panel_item_types,
+    ToolPanelElements,
+    ToolSection,
+    ToolSectionLabel,
+)
+from .parser import (
+    ensure_tool_conf_item,
+    get_toolbox_parser,
+)
 from .tags import tool_tag_manager
-from .views.edam import EdamPanelMode, EdamToolPanelView
+from .views.edam import (
+    EdamPanelMode,
+    EdamToolPanelView,
+)
 from .views.interface import (
     ToolBoxRegistry,
     ToolPanelView,

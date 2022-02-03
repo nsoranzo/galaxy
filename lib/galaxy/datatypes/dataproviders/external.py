@@ -13,7 +13,10 @@ from urllib.parse import (
 from urllib.request import urlopen
 
 from galaxy.util import DEFAULT_SOCKET_TIMEOUT
-from . import base, line
+from . import (
+    base,
+    line,
+)
 
 _TODO = """
 YAGNI: ftp, image, cryptos, sockets

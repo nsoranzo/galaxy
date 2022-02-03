@@ -1,6 +1,10 @@
 import logging
 
-from . import repository_suite_definition, tool_dependency_definition, unrestricted
+from . import (
+    repository_suite_definition,
+    tool_dependency_definition,
+    unrestricted,
+)
 
 log = logging.getLogger(__name__)
 

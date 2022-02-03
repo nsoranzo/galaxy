@@ -5,10 +5,22 @@ Migration script to create the tool_id_guid_map table.
 import datetime
 import logging
 
-from sqlalchemy import Column, DateTime, Index, Integer, MetaData, String, Table, TEXT
+from sqlalchemy import (
+    Column,
+    DateTime,
+    Index,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    TEXT,
+)
 
 from galaxy.model.custom_types import TrimmedString
-from galaxy.model.migrate.versions.util import create_table, drop_table
+from galaxy.model.migrate.versions.util import (
+    create_table,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

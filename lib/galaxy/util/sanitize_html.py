@@ -5,7 +5,6 @@ import bleach
 
 from galaxy.util import unicodify
 
-
 _acceptable_elements = [
     "a",
     "abbr",

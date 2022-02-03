@@ -8,7 +8,12 @@ from galaxy.datatypes.sniff import (
     build_sniff_from_prefix,
     FilePrefix,
 )
-from . import binary, data, text, xml
+from . import (
+    binary,
+    data,
+    text,
+    xml,
+)
 
 log = logging.getLogger(__name__)
 

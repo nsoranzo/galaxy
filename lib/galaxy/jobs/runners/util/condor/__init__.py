@@ -1,9 +1,15 @@
 """
 Condor helper utilities.
 """
-from subprocess import CalledProcessError, check_call
+from subprocess import (
+    CalledProcessError,
+    check_call,
+)
 
-from galaxy.util import commands, unicodify
+from galaxy.util import (
+    commands,
+    unicodify,
+)
 from ..external import parse_external_id
 
 DEFAULT_QUERY_CLASSAD = dict(

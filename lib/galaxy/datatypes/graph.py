@@ -4,7 +4,12 @@ Graph content classes.
 import logging
 
 from galaxy.util import simplegraph
-from . import data, dataproviders, tabular, xml
+from . import (
+    data,
+    dataproviders,
+    tabular,
+    xml,
+)
 
 log = logging.getLogger(__name__)
 

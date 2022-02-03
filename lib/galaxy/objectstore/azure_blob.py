@@ -17,7 +17,10 @@ try:
 except ImportError:
     BlockBlobService = None
 
-from galaxy.exceptions import ObjectInvalid, ObjectNotFound
+from galaxy.exceptions import (
+    ObjectInvalid,
+    ObjectNotFound,
+)
 from galaxy.util import (
     directory_hash_id,
     umask_fix_perms,

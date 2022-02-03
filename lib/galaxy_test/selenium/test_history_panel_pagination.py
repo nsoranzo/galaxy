@@ -1,7 +1,10 @@
 import pytest
 
 from galaxy_test.base.populators import flakey
-from .framework import selenium_test, SeleniumTestCase
+from .framework import (
+    selenium_test,
+    SeleniumTestCase,
+)
 
 
 class HistoryPanelPaginationTestCase(SeleniumTestCase):

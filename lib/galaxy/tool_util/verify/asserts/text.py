@@ -1,6 +1,9 @@
 import re
 
-from ._util import _assert_number, _assert_presence_number
+from ._util import (
+    _assert_number,
+    _assert_presence_number,
+)
 
 
 def assert_has_text(

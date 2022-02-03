@@ -6,9 +6,14 @@ from markupsafe import escape
 from sqlalchemy import and_
 
 import galaxy.model
-from galaxy.util import restore_text, unicodify
-from galaxy.webapps.base.controller import BaseUIController, web
-
+from galaxy.util import (
+    restore_text,
+    unicodify,
+)
+from galaxy.webapps.base.controller import (
+    BaseUIController,
+    web,
+)
 
 log = logging.getLogger(__name__)
 

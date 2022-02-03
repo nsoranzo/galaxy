@@ -61,7 +61,10 @@ from galaxy.util.properties import (
 )
 from galaxy.web.formatting import expand_pretty_datetime_format
 from galaxy.web_stack import get_stack_facts
-from ..version import VERSION_MAJOR, VERSION_MINOR
+from ..version import (
+    VERSION_MAJOR,
+    VERSION_MINOR,
+)
 
 try:
     from importlib.resources import files  # type: ignore[attr-defined]
@@ -665,6 +668,7 @@ class GalaxyAppConfiguration(BaseAppConfiguration, CommonConfigurationMixin):
 
     def _setup_sqlalchemy20_warnings_filters(self):
         import warnings
+
         from sqlalchemy.exc import RemovedIn20Warning
 
         # Always display RemovedIn20Warning warnings.
@@ -1334,12 +1338,12 @@ class ConfiguresGalaxyMixin:
             self.config.tool_configs.append(self.config.migrated_tools_config)
 
     def _configure_toolbox(self):
+        import galaxy.tools.search
         from galaxy import tools
-        from galaxy.tools.biotools import get_galaxy_biotools_metadata_source
         from galaxy.managers.citations import CitationsManager
         from galaxy.tool_util.deps import containers
         from galaxy.tool_util.deps.dependencies import AppInfo
-        import galaxy.tools.search
+        from galaxy.tools.biotools import get_galaxy_biotools_metadata_source
 
         if not isinstance(self, BasicSharedApp):
             raise Exception("Must inherit from BasicSharedApp")

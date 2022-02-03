@@ -5,11 +5,23 @@ from html.parser import HTMLParser
 from http.client import HTTPConnection
 
 from markupsafe import escape
-from sqlalchemy import and_, desc
-from sqlalchemy.orm import eagerload, joinedload, lazyload, undefer
+from sqlalchemy import (
+    and_,
+    desc,
+)
+from sqlalchemy.orm import (
+    eagerload,
+    joinedload,
+    lazyload,
+    undefer,
+)
 from sqlalchemy.sql import expression
 
-from galaxy import model, util, web
+from galaxy import (
+    model,
+    util,
+    web,
+)
 from galaxy.managers.sharable import SlugBuilder
 from galaxy.managers.workflows import (
     MissingToolsException,
@@ -18,17 +30,36 @@ from galaxy.managers.workflows import (
 from galaxy.model.item_attrs import UsesItemRatings
 from galaxy.security.validate_user_input import validate_publicname
 from galaxy.tools.parameters.basic import workflow_building_modes
-from galaxy.util import FILENAME_VALID_CHARS, unicodify
+from galaxy.util import (
+    FILENAME_VALID_CHARS,
+    unicodify,
+)
 from galaxy.util.sanitize_html import sanitize_html
-from galaxy.web import error, url_for
+from galaxy.web import (
+    error,
+    url_for,
+)
 from galaxy.web.framework.helpers import (
     grids,
     time_ago,
 )
-from galaxy.webapps.base.controller import BaseUIController, SharableMixin, UsesStoredWorkflowMixin
-from galaxy.workflow.extract import extract_workflow, summarize
-from galaxy.workflow.modules import load_module_sections, module_factory
-from galaxy.workflow.render import STANDALONE_SVG_TEMPLATE, WorkflowCanvas
+from galaxy.webapps.base.controller import (
+    BaseUIController,
+    SharableMixin,
+    UsesStoredWorkflowMixin,
+)
+from galaxy.workflow.extract import (
+    extract_workflow,
+    summarize,
+)
+from galaxy.workflow.modules import (
+    load_module_sections,
+    module_factory,
+)
+from galaxy.workflow.render import (
+    STANDALONE_SVG_TEMPLATE,
+    WorkflowCanvas,
+)
 
 log = logging.getLogger(__name__)
 

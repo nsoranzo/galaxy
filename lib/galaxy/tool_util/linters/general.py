@@ -3,7 +3,6 @@ import re
 
 import packaging.version
 
-
 ERROR_VERSION_MSG = "Tool version is missing or empty."
 WARN_VERSION_MSG = "Tool version [%s] is not compliant with PEP 440."
 VALID_VERSION_MSG = "Tool defines a version [%s]."

@@ -1,9 +1,16 @@
 import fnmatch
 import os
 import re
-from abc import ABCMeta, abstractmethod
+from abc import (
+    ABCMeta,
+    abstractmethod,
+)
 from os.path import join
-from typing import Dict, List, Optional
+from typing import (
+    Dict,
+    List,
+    Optional,
+)
 
 from galaxy.util.path import safe_walk
 from .util import _parse_name

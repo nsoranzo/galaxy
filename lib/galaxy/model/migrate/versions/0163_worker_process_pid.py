@@ -5,9 +5,16 @@ Adds `pid` column to worker_process table.
 
 import logging
 
-from sqlalchemy import Column, Integer, MetaData
+from sqlalchemy import (
+    Column,
+    Integer,
+    MetaData,
+)
 
-from galaxy.model.migrate.versions.util import add_column, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 

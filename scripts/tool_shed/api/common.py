@@ -2,7 +2,13 @@ import json
 import os
 import sys
 from urllib.error import HTTPError
-from urllib.request import build_opener, HTTPRedirectHandler, install_opener, Request, urlopen
+from urllib.request import (
+    build_opener,
+    HTTPRedirectHandler,
+    install_opener,
+    Request,
+    urlopen,
+)
 
 sys.path.insert(1, os.path.join(os.path.dirname(__file__), os.pardir, os.pardir, os.pardir, "lib"))
 

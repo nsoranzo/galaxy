@@ -1,5 +1,8 @@
 from galaxy.selenium.navigates_galaxy import retry_during_transitions
-from .framework import selenium_test, SeleniumIntegrationTestCase
+from .framework import (
+    selenium_test,
+    SeleniumIntegrationTestCase,
+)
 
 
 class EdamToolPanelViewsSeleniumIntegrationTestCase(SeleniumIntegrationTestCase):

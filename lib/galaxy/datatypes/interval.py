@@ -7,17 +7,31 @@ import sys
 import tempfile
 from urllib.parse import quote_plus
 
-from bx.intervals.io import GenomicIntervalReader, ParseError
+from bx.intervals.io import (
+    GenomicIntervalReader,
+    ParseError,
+)
 
 from galaxy import util
 from galaxy.datatypes import metadata
 from galaxy.datatypes.data import DatatypeValidation
 from galaxy.datatypes.metadata import MetadataElement
-from galaxy.datatypes.sniff import build_sniff_from_prefix, FilePrefix, get_headers, iter_headers
+from galaxy.datatypes.sniff import (
+    build_sniff_from_prefix,
+    FilePrefix,
+    get_headers,
+    iter_headers,
+)
 from galaxy.datatypes.tabular import Tabular
-from galaxy.datatypes.util.gff_util import parse_gff3_attributes, parse_gff_attributes
+from galaxy.datatypes.util.gff_util import (
+    parse_gff3_attributes,
+    parse_gff_attributes,
+)
 from galaxy.util import compression_utils
-from . import data, dataproviders
+from . import (
+    data,
+    dataproviders,
+)
 
 log = logging.getLogger(__name__)
 

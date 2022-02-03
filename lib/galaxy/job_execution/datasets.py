@@ -2,7 +2,10 @@
 Utility classes allowing Job interface to reason about datasets.
 """
 import os.path
-from abc import ABCMeta, abstractmethod
+from abc import (
+    ABCMeta,
+    abstractmethod,
+)
 
 
 def dataset_path_rewrites(dataset_paths):

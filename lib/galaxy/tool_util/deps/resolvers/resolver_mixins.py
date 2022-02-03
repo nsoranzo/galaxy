@@ -1,6 +1,9 @@
 import os
 
-from . import Dependency, NullDependency
+from . import (
+    Dependency,
+    NullDependency,
+)
 from ..brew_exts import (
     build_env_statements,
     DEFAULT_HOMEBREW_ROOT,

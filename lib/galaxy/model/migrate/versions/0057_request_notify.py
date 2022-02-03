@@ -6,7 +6,12 @@ to a JSONType
 import logging
 from json import dumps
 
-from sqlalchemy import Boolean, Column, MetaData, Table
+from sqlalchemy import (
+    Boolean,
+    Column,
+    MetaData,
+    Table,
+)
 
 from galaxy.model.custom_types import JSONType
 from galaxy.model.migrate.versions.util import (

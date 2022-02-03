@@ -5,7 +5,11 @@ import logging
 import os
 import shutil
 
-from galaxy import exceptions, model, util
+from galaxy import (
+    exceptions,
+    model,
+    util,
+)
 from galaxy.web import (
     expose_api_anonymous_and_sessionless,
     expose_api_raw_anonymous_and_sessionless,

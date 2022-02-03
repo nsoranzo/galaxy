@@ -39,7 +39,11 @@ from galaxy.datatypes.sniff import (
     FilePrefix,
 )
 from galaxy.util import smart_str
-from .data import Data, get_file_peek, Text
+from .data import (
+    Data,
+    get_file_peek,
+    Text,
+)
 from .xml import GenericXml
 
 log = logging.getLogger(__name__)

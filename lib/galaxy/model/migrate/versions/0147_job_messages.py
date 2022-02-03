@@ -4,10 +4,19 @@ Add structured failure reason column to jobs table
 
 import logging
 
-from sqlalchemy import Column, MetaData, Table, TEXT
+from sqlalchemy import (
+    Column,
+    MetaData,
+    Table,
+    TEXT,
+)
 
 from galaxy.model.custom_types import JSONType
-from galaxy.model.migrate.versions.util import add_column, alter_column, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    alter_column,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

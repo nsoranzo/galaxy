@@ -8,9 +8,23 @@ column.
 
 import logging
 
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, String, Table
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+    String,
+    Table,
+)
 
-from galaxy.model.migrate.versions.util import add_column, add_index, create_table, drop_column, drop_index, drop_table
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    add_index,
+    create_table,
+    drop_column,
+    drop_index,
+    drop_table,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

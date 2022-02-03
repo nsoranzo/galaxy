@@ -4,7 +4,11 @@ import re
 import subprocess
 from string import Template
 
-from galaxy.util import asbool, in_directory, smart_str
+from galaxy.util import (
+    asbool,
+    in_directory,
+    smart_str,
+)
 
 UPDATE_TEMPLATE = Template(
     "git --work-tree $dir --git-dir $dir/.git fetch && " "git --work-tree $dir --git-dir $dir/.git merge origin/master"

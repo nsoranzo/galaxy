@@ -5,9 +5,16 @@ Add 'galaxy_version' attribute to Job table.
 import datetime
 import logging
 
-from sqlalchemy import Column, MetaData, String
+from sqlalchemy import (
+    Column,
+    MetaData,
+    String,
+)
 
-from galaxy.model.migrate.versions.util import add_column, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

@@ -4,7 +4,10 @@ from json import loads
 
 import yaml
 from markupsafe import escape
-from paste.httpexceptions import HTTPBadRequest, HTTPNotFound
+from paste.httpexceptions import (
+    HTTPBadRequest,
+    HTTPNotFound,
+)
 from sqlalchemy import (
     desc,
     false,
@@ -12,21 +15,43 @@ from sqlalchemy import (
     text,
     true,
 )
-from sqlalchemy.orm import eagerload, undefer
+from sqlalchemy.orm import (
+    eagerload,
+    undefer,
+)
 
-from galaxy import model, util, web
+from galaxy import (
+    model,
+    util,
+    web,
+)
 from galaxy.managers.hdas import HDAManager
 from galaxy.managers.sharable import SlugBuilder
-from galaxy.model.item_attrs import UsesAnnotations, UsesItemRatings
+from galaxy.model.item_attrs import (
+    UsesAnnotations,
+    UsesItemRatings,
+)
 from galaxy.structured_app import StructuredApp
-from galaxy.util import sanitize_text, unicodify
+from galaxy.util import (
+    sanitize_text,
+    unicodify,
+)
 from galaxy.util.sanitize_html import sanitize_html
 from galaxy.visualization.data_providers.phyloviz import PhylovizDataProvider
-from galaxy.visualization.genomes import decode_dbkey
-from galaxy.visualization.genomes import GenomeRegion
+from galaxy.visualization.genomes import (
+    decode_dbkey,
+    GenomeRegion,
+)
 from galaxy.visualization.plugins import registry
-from galaxy.web.framework.helpers import grids, time_ago
-from galaxy.webapps.base.controller import BaseUIController, SharableMixin, UsesVisualizationMixin
+from galaxy.web.framework.helpers import (
+    grids,
+    time_ago,
+)
+from galaxy.webapps.base.controller import (
+    BaseUIController,
+    SharableMixin,
+    UsesVisualizationMixin,
+)
 from ..api import depends
 
 log = logging.getLogger(__name__)

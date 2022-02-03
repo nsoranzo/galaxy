@@ -1,7 +1,11 @@
 import calendar
 import logging
 import operator
-from datetime import date, datetime, timedelta
+from datetime import (
+    date,
+    datetime,
+    timedelta,
+)
 
 import sqlalchemy as sa
 from markupsafe import escape
@@ -9,7 +13,10 @@ from sqlalchemy import false
 
 import galaxy.model
 from galaxy import util
-from galaxy.webapps.base.controller import BaseUIController, web
+from galaxy.webapps.base.controller import (
+    BaseUIController,
+    web,
+)
 from galaxy.webapps.reports.controllers.jobs import sorter
 from galaxy.webapps.reports.controllers.query import ReportQueryBuilder
 

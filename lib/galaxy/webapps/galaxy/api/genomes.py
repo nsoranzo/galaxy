@@ -23,7 +23,6 @@ from . import (
     Router,
 )
 
-
 router = Router(tags=["genomes"])
 
 IdPathParam: str = Path(..., title="Genome ID", description="Genome ID")

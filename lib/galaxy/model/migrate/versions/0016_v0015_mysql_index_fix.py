@@ -8,9 +8,15 @@ This is now fixed in SQLAlchemy Migrate.
 
 import logging
 
-from sqlalchemy import MetaData, Table
+from sqlalchemy import (
+    MetaData,
+    Table,
+)
 
-from galaxy.model.migrate.versions.util import add_index, drop_index
+from galaxy.model.migrate.versions.util import (
+    add_index,
+    drop_index,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

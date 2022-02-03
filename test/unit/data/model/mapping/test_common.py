@@ -5,9 +5,19 @@ This module contains tests for the utility functions in the test_mapping module.
 from contextlib import contextmanager
 
 import pytest
-from sqlalchemy import Column, create_engine, Index, Integer, select, UniqueConstraint
+from sqlalchemy import (
+    Column,
+    create_engine,
+    Index,
+    Integer,
+    select,
+    UniqueConstraint,
+)
 from sqlalchemy.exc import NoResultFound
-from sqlalchemy.orm import registry, Session
+from sqlalchemy.orm import (
+    registry,
+    Session,
+)
 
 from galaxy.model import _HasTable
 from .common import (

@@ -21,13 +21,15 @@ from pulsar.client import (
     ClientJobDescription,
     ClientOutputs,
     EXTENDED_METADATA_DYNAMIC_COLLECTION_PATTERN,
-    finish_job as pulsar_finish_job,
+)
+from pulsar.client import finish_job as pulsar_finish_job
+from pulsar.client import (
     PathMapper,
     PulsarClientTransportError,
     PulsarOutputs,
-    submit_job as pulsar_submit_job,
-    url_to_destination_params,
 )
+from pulsar.client import submit_job as pulsar_submit_job
+from pulsar.client import url_to_destination_params
 
 # TODO: Perform pulsar release with this included in the client package
 from pulsar.client.staging import DEFAULT_DYNAMIC_COLLECTION_PATTERN
@@ -36,9 +38,16 @@ from galaxy import model
 from galaxy.job_execution.compute_environment import ComputeEnvironment
 from galaxy.jobs import JobDestination
 from galaxy.jobs.command_factory import build_command
-from galaxy.jobs.runners import AsynchronousJobRunner, AsynchronousJobState
+from galaxy.jobs.runners import (
+    AsynchronousJobRunner,
+    AsynchronousJobState,
+)
 from galaxy.tool_util.deps import dependencies
-from galaxy.util import galaxy_directory, specs, string_as_bool_or_none
+from galaxy.util import (
+    galaxy_directory,
+    specs,
+    string_as_bool_or_none,
+)
 from galaxy.util.bunch import Bunch
 
 log = logging.getLogger(__name__)

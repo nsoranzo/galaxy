@@ -8,7 +8,12 @@ import shlex
 from functools import partial
 from itertools import starmap
 from operator import getitem
-from os import extsep, makedirs, stat, walk
+from os import (
+    extsep,
+    makedirs,
+    stat,
+    walk,
+)
 from os.path import (
     abspath,
     basename,
@@ -21,8 +26,8 @@ from os.path import (
     pardir,
     realpath,
     relpath,
-    sep as separator,
 )
+from os.path import sep as separator
 from pathlib import Path
 
 try:

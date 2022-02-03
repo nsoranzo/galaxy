@@ -2,7 +2,10 @@ import shutil
 import tempfile
 import unittest
 
-from galaxy.util.compression_utils import CompressedFile, get_fileobj_raw
+from galaxy.util.compression_utils import (
+    CompressedFile,
+    get_fileobj_raw,
+)
 
 
 class CompressionUtilTestCase(unittest.TestCase):

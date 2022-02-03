@@ -1,7 +1,13 @@
 import hashlib
 import logging
 
-from sqlalchemy import BLOB, DDL, Index, Table, Text
+from sqlalchemy import (
+    BLOB,
+    DDL,
+    Index,
+    Table,
+    Text,
+)
 from sqlalchemy.dialects.mysql import MEDIUMBLOB
 
 log = logging.getLogger(__name__)

@@ -17,7 +17,10 @@ try:
 except Exception:
     pass
 
-from docutils.core import default_description, publish_cmdline
+from docutils.core import (
+    default_description,
+    publish_cmdline,
+)
 
 description = "Generates (X)HTML documents from standalone reStructuredText " "sources.  " + default_description
 

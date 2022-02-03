@@ -1,9 +1,16 @@
 import unittest
 
-from galaxy.managers import collections, hdas, hdcas
+from galaxy.managers import (
+    collections,
+    hdas,
+    hdcas,
+)
 from galaxy.managers.datasets import DatasetManager
 from galaxy.managers.histories import HistoryManager
-from .base import BaseTestCase, CreatesCollectionsMixin
+from .base import (
+    BaseTestCase,
+    CreatesCollectionsMixin,
+)
 
 # =============================================================================
 default_password = "123456"

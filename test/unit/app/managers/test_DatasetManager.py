@@ -4,9 +4,15 @@ import unittest
 
 import sqlalchemy
 
-from galaxy import exceptions, model
+from galaxy import (
+    exceptions,
+    model,
+)
 from galaxy.managers.base import SkipAttribute
-from galaxy.managers.datasets import DatasetManager, DatasetSerializer
+from galaxy.managers.datasets import (
+    DatasetManager,
+    DatasetSerializer,
+)
 from galaxy.managers.roles import RoleManager
 from .base import BaseTestCase
 

@@ -4,9 +4,17 @@ Migration script to add 'ldda_parent_id' column to the implicitly_converted_data
 
 import logging
 
-from sqlalchemy import Column, ForeignKey, Integer, MetaData
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+)
 
-from galaxy.model.migrate.versions.util import add_column, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

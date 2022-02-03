@@ -15,7 +15,10 @@ import os
 import subprocess
 
 from galaxy import model
-from galaxy.jobs.runners import AsynchronousJobRunner, AsynchronousJobState
+from galaxy.jobs.runners import (
+    AsynchronousJobRunner,
+    AsynchronousJobState,
+)
 from galaxy.jobs.runners.util.condor import (
     build_submit_description,
     condor_stop,

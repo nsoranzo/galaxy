@@ -7,7 +7,10 @@ from Crypto.Cipher import Blowfish
 from Crypto.Random import get_random_bytes
 
 import galaxy.exceptions
-from galaxy.util import smart_str, unicodify
+from galaxy.util import (
+    smart_str,
+    unicodify,
+)
 
 log = logging.getLogger(__name__)
 

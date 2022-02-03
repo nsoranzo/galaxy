@@ -10,10 +10,22 @@ sample_dataset table and populates it.
 import datetime
 import logging
 
-from sqlalchemy import Column, ForeignKey, Integer, MetaData, Table
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Table,
+)
 
 from galaxy.model.custom_types import TrimmedString
-from galaxy.model.migrate.versions.util import add_column, create_table, drop_column, drop_table, nextval
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    create_table,
+    drop_column,
+    drop_table,
+    nextval,
+)
 
 now = datetime.datetime.utcnow
 log = logging.getLogger(__name__)

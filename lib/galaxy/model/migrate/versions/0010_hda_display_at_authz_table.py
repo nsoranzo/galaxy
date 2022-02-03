@@ -12,7 +12,14 @@ is too long
 import datetime
 import logging
 
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, MetaData, Table
+from sqlalchemy import (
+    Column,
+    DateTime,
+    ForeignKey,
+    Integer,
+    MetaData,
+    Table,
+)
 
 from galaxy.model.custom_types import TrimmedString
 

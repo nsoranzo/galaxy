@@ -1,4 +1,7 @@
-from galaxy.datatypes.binary import Bcf, BcfUncompressed
+from galaxy.datatypes.binary import (
+    Bcf,
+    BcfUncompressed,
+)
 from .util import (
     get_dataset,
     get_input_files,

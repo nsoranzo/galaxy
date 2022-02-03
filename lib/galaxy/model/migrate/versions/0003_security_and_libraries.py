@@ -5,9 +5,24 @@ import datetime
 import logging
 
 from migrate import ForeignKeyConstraint
-from sqlalchemy import Boolean, Column, DateTime, ForeignKey, Index, Integer, MetaData, String, Table, TEXT
+from sqlalchemy import (
+    Boolean,
+    Column,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    TEXT,
+)
 
-from galaxy.model.custom_types import JSONType, MetadataType, TrimmedString
+from galaxy.model.custom_types import (
+    JSONType,
+    MetadataType,
+    TrimmedString,
+)
 from galaxy.model.migrate.versions.util import (
     add_column,
     add_index,

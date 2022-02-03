@@ -6,7 +6,10 @@ import logging
 
 from galaxy import exceptions
 from galaxy.exceptions import ActionInputError
-from galaxy.managers import cloud, datasets
+from galaxy.managers import (
+    cloud,
+    datasets,
+)
 from galaxy.structured_app import StructuredApp
 from galaxy.web import expose_api
 from . import BaseGalaxyAPIController

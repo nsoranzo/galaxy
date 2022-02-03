@@ -6,10 +6,17 @@ This migration script adds a new column to 2 tables:
 
 import logging
 
-from sqlalchemy import Boolean, Column, MetaData
+from sqlalchemy import (
+    Boolean,
+    Column,
+    MetaData,
+)
 
 from galaxy.model.custom_types import TrimmedString
-from galaxy.model.migrate.versions.util import add_column, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

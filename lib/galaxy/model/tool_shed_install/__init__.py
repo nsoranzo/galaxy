@@ -19,7 +19,10 @@ from sqlalchemy.orm import (
 )
 from sqlalchemy.orm.decl_api import DeclarativeMeta
 
-from galaxy.model.custom_types import MutableJSONType, TrimmedString
+from galaxy.model.custom_types import (
+    MutableJSONType,
+    TrimmedString,
+)
 from galaxy.model.orm.now import now
 from galaxy.util import asbool
 from galaxy.util.bunch import Bunch

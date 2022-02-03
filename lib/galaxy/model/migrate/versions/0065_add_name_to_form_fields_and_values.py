@@ -5,9 +5,15 @@ table, the 'content' column is now a JSON dict instead of a list.
 """
 
 import logging
-from json import dumps, loads
+from json import (
+    dumps,
+    loads,
+)
 
-from sqlalchemy import MetaData, Table
+from sqlalchemy import (
+    MetaData,
+    Table,
+)
 
 from galaxy.model.custom_types import _sniffnfix_pg9_hex
 

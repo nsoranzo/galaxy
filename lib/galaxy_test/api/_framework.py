@@ -1,5 +1,8 @@
 from typing import Optional
-from unittest import SkipTest, TestCase
+from unittest import (
+    SkipTest,
+    TestCase,
+)
 
 from galaxy_test.base.api import UsesApiTestCaseMixin
 from galaxy_test.base.testcase import FunctionalTestCase

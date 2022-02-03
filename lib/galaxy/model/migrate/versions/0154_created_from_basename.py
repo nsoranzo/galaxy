@@ -4,9 +4,16 @@ Adds created_from_basename to dataset.
 import datetime
 import logging
 
-from sqlalchemy import Column, MetaData, TEXT
+from sqlalchemy import (
+    Column,
+    MetaData,
+    TEXT,
+)
 
-from galaxy.model.migrate.versions.util import add_column, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 now = datetime.datetime.utcnow

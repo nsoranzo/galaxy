@@ -5,9 +5,18 @@ Migration script to add dbkey column for visualization.
 import logging
 from json import loads
 
-from sqlalchemy import Column, MetaData, Table, TEXT
+from sqlalchemy import (
+    Column,
+    MetaData,
+    Table,
+    TEXT,
+)
 
-from galaxy.model.migrate.versions.util import add_column, add_index, drop_column
+from galaxy.model.migrate.versions.util import (
+    add_column,
+    add_index,
+    drop_column,
+)
 
 log = logging.getLogger(__name__)
 metadata = MetaData()

@@ -5,14 +5,22 @@ generalize to generic database connections.
 import os
 import threading
 from contextvars import ContextVar
-from inspect import getmembers, isclass
-from typing import Dict, Type
+from inspect import (
+    getmembers,
+    isclass,
+)
+from typing import (
+    Dict,
+    Type,
+)
 
 from sqlalchemy import event
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import (
+    scoped_session,
+    sessionmaker,
+)
 
 from galaxy.util.bunch import Bunch
-
 
 # Create a ContextVar with mutable state, this allows sync tasks in the context
 # of a request (which run within a threadpool) to see changes to the ContextVar

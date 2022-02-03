@@ -1,13 +1,21 @@
 import os
 import string
-from abc import ABCMeta, abstractmethod
+from abc import (
+    ABCMeta,
+    abstractmethod,
+)
 from logging import getLogger
 from uuid import uuid4
 
-
 from galaxy.containers.docker_model import DockerVolume
-from galaxy.util import asbool, in_directory
-from . import docker_util, singularity_util
+from galaxy.util import (
+    asbool,
+    in_directory,
+)
+from . import (
+    docker_util,
+    singularity_util,
+)
 from .requirements import (
     DEFAULT_CONTAINER_RESOLVE_DEPENDENCIES,
     DEFAULT_CONTAINER_SHELL,

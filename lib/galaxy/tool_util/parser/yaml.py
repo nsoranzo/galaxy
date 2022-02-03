@@ -3,7 +3,10 @@ import json
 import packaging.version
 
 from galaxy.tool_util.deps import requirements
-from galaxy.tool_util.parser.util import DEFAULT_DELTA, DEFAULT_DELTA_FRAC
+from galaxy.tool_util.parser.util import (
+    DEFAULT_DELTA,
+    DEFAULT_DELTA_FRAC,
+)
 from .interface import (
     InputSource,
     PageSource,

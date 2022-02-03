@@ -9,14 +9,29 @@ from queue import (
     Empty,
     Queue,
 )
-from typing import Dict, List, Tuple
+from typing import (
+    Dict,
+    List,
+    Tuple,
+)
 
 from sqlalchemy.exc import OperationalError
-from sqlalchemy.sql.expression import and_, func, null, or_, select, true
+from sqlalchemy.sql.expression import (
+    and_,
+    func,
+    null,
+    or_,
+    select,
+    true,
+)
 
 from galaxy import model
 from galaxy.exceptions import ObjectNotFound
-from galaxy.jobs import JobDestination, JobWrapper, TaskWrapper
+from galaxy.jobs import (
+    JobDestination,
+    JobWrapper,
+    TaskWrapper,
+)
 from galaxy.jobs.mapper import JobNotReadyException
 from galaxy.structured_app import MinimalManagerApp
 from galaxy.util import unicodify
