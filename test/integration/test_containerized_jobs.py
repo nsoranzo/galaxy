@@ -157,7 +157,7 @@ class TestDockerizedJobsIntegration(BaseJobEnvironmentIntegrationTestCase, Mulle
         assert status[0]["dependency_type"] == self.container_type
         self._assert_container_description_identifier(
             status[0]["container_description"]["identifier"],
-            "mulled-v2-8186960447c5cb2faa697666dc1e6d919ad23f3e:a6419f25efff953fc505dbd5ee734856180bb619-0"
+            "mulled-v2-8186960447c5cb2faa697666dc1e6d919ad23f3e:a6419f25efff953fc505dbd5ee734856180bb619-0",
         )
 
     def _assert_container_description_identifier(self, identifier, expected_hash):
