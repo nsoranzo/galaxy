@@ -168,7 +168,6 @@ class TestDockerizedJobsIntegration(BaseJobEnvironmentIntegrationTestCase, Mulle
         assert identifier.startswith(f"quay.io/local/{expected_hash}")
 
 
-
 class TestMappingContainerResolver(integration_util.IntegrationTestCase):
     dataset_populator: DatasetPopulator
     jobs_directory: str
