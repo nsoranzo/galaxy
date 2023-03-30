@@ -331,32 +331,29 @@ class ToolEvaluator:
                         dataset_instances,
                         compute_environment=self.compute_environment,
                         datatypes_registry=self.app.datatypes_registry,
-                        tool=self.tool,
-                        name=input.name,
                         formats=input.formats,
                     )
 
                 elif isinstance(input, DataToolParameter):
                     dataset = input_values[input.name]
-                    wrapper_kwds = dict(
-                        datatypes_registry=self.app.datatypes_registry,
-                        tool=self.tool,
-                        name=input.name,
-                        compute_environment=self.compute_environment,
-                    )
+                    wrapper_kwds: Dict[str, Any] = {}  # https://github.com/python/mypy/issues/10008
                     element_identifier = element_identifier_mapper.identifier(dataset, param_dict)
                     if element_identifier:
                         wrapper_kwds["identifier"] = element_identifier
-                    input_values[input.name] = DatasetFilenameWrapper(dataset, **wrapper_kwds)
-                elif isinstance(input, DataCollectionToolParameter):
-                    dataset_collection = value
-                    wrapper_kwds = dict(
+                    input_values[input.name] = DatasetFilenameWrapper(
+                        dataset,
                         datatypes_registry=self.app.datatypes_registry,
                         compute_environment=self.compute_environment,
-                        tool=self.tool,
-                        name=input.name,
+                        **wrapper_kwds,
                     )
-                    wrapper = DatasetCollectionWrapper(job_working_directory, dataset_collection, **wrapper_kwds)
+                elif isinstance(input, DataCollectionToolParameter):
+                    dataset_collection = value
+                    wrapper = DatasetCollectionWrapper(
+                        job_working_directory,
+                        dataset_collection,
+                        datatypes_registry=self.app.datatypes_registry,
+                        compute_environment=self.compute_environment,
+                    )
                     input_values[input.name] = wrapper
                 elif isinstance(input, SelectToolParameter):
                     if input.multiple:
@@ -394,13 +391,9 @@ class ToolEvaluator:
                     param_dict[name] = wrapper
                     continue
             if not isinstance(param_dict_value, (DatasetFilenameWrapper, DatasetListWrapper)):
-                wrapper_kwds = dict(
-                    datatypes_registry=self.app.datatypes_registry,
-                    tool=self.tool,
-                    name=name,
-                    compute_environment=self.compute_environment,
+                param_dict[name] = DatasetFilenameWrapper(
+                    data, datatypes_registry=self.app.datatypes_registry, compute_environment=self.compute_environment
                 )
-                param_dict[name] = DatasetFilenameWrapper(data, **wrapper_kwds)
 
     def __populate_output_collection_wrappers(self, param_dict, output_collections, job_working_directory):
         tool = self.tool
@@ -411,14 +404,13 @@ class ToolEvaluator:
                 # message = message_template % ( name, tool.output_collections )
                 # raise AssertionError( message )
 
-            wrapper_kwds = dict(
+            wrapper = DatasetCollectionWrapper(
+                job_working_directory,
+                out_collection,
                 datatypes_registry=self.app.datatypes_registry,
                 compute_environment=self.compute_environment,
                 io_type="output",
-                tool=tool,
-                name=name,
             )
-            wrapper = DatasetCollectionWrapper(job_working_directory, out_collection, **wrapper_kwds)
             param_dict[name] = wrapper
             # TODO: Handle nested collections...
             for element_identifier, output_def in tool.output_collections[name].outputs.items():

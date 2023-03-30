@@ -74,14 +74,10 @@ class WrappedParameters:
                     None,
                     dataset_instances,
                     datatypes_registry=trans.app.datatypes_registry,
-                    tool=tool,
-                    name=input.name,
                     formats=input.formats,
                 )
             elif isinstance(input, DataToolParameter):
-                wrapper_kwds = dict(
-                    datatypes_registry=trans.app.datatypes_registry, tool=tool, name=input.name, formats=input.formats
-                )
+                wrapper_kwds = dict(datatypes_registry=trans.app.datatypes_registry, formats=input.formats)
                 element_identifier = element_identifier_mapper.identifier(value, input_values)
                 if element_identifier:
                     wrapper_kwds["identifier"] = element_identifier
@@ -94,8 +90,6 @@ class WrappedParameters:
                     None,
                     value,
                     datatypes_registry=trans.app.datatypes_registry,
-                    tool=tool,
-                    name=input.name,
                 )
             else:
                 input_values[input.name] = InputValueWrapper(input, value, incoming, tool.profile)
