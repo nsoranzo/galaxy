@@ -326,7 +326,9 @@ class CompressedFile:
         return False
 
     def open_tar(self, filepath: StrPath, mode: str) -> tarfile.TarFile:
-        return tarfile.open(filepath, mode, errorlevel=0)
+        tf = tarfile.open(filepath, mode, errorlevel=0)
+        tf.extraction_filter = getattr(tarfile, "data_filter", None)  # type: ignore[attr-defined]
+        return tf
 
     def open_zip(self, filepath: StrPath, mode: str) -> zipfile.ZipFile:
         mode = cast(Literal["a", "r", "w", "x"], mode)

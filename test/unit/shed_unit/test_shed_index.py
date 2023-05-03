@@ -27,7 +27,9 @@ def whoosh_index_dir():
 def community_file_dir():
     extracted_archive_dir = tempfile.mkdtemp()
     b = BytesIO(requests.get(URL).content)
-    tarfile.open(fileobj=b, mode="r:gz").extractall(extracted_archive_dir)
+    with tarfile.open(fileobj=b, mode="r:gz") as tar:
+        tar.extraction_filter = getattr(tarfile, "data_filter", None)  # type: ignore[attr-defined]
+        tar.extractall(extracted_archive_dir)
     try:
         yield extracted_archive_dir
     finally:

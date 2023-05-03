@@ -67,6 +67,7 @@ def test_validate_tool_without_index():
 def setup_bismark():
     repo_dir = tempfile.mkdtemp()
     with tarfile.open(BISMARK_TAR) as archive:
+        archive.extraction_filter = getattr(tarfile, "data_filter", None)  # type: ignore[attr-defined]
         archive.extractall(repo_dir)
     yield repo_dir
     shutil.rmtree(repo_dir, ignore_errors=True)

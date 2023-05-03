@@ -1,5 +1,6 @@
 import os
 import shutil
+import tarfile
 
 import tool_shed.repository_types.util as rt_util
 from tool_shed.util import (
@@ -39,6 +40,7 @@ def upload_tar(
         undesirable_dirs_removed = len(check_results.undesirable_dirs)
         filenames_in_archive = [ti.name for ti in check_results.valid]
         # Extract the uploaded tar to the load_point within the repository hierarchy.
+        tar.extraction_filter = getattr(tarfile, "data_filter", None)  # type: ignore[attr-defined]
         tar.extractall(path=full_path, members=check_results.valid)
         tar.close()
         uploaded_file.close()

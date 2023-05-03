@@ -472,6 +472,7 @@ class GalaxyInteractorApi:
                     else:
                         # Galaxy < 21.01
                         with tarfile.open(fileobj=fileobj) as tar_contents:
+                            tar_contents.extraction_filter = getattr(tarfile, "data_filter", None)  # type: ignore[attr-defined]
                             tar_contents.extractall(path=path)
                     result = path
         else:
