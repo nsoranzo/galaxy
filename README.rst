@@ -1,3 +1,5 @@
+Test
+
 .. figure:: https://galaxyproject.org/images/galaxy-logos/galaxy_project_logo.jpg
    :alt: Galaxy Logo
 
