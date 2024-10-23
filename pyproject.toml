@@ -58,6 +58,7 @@ docutils = "!=0.17, !=0.17.1"
 dparse = "*"
 edam-ontology = "*"
 fastapi-slim = ">=0.111.0"
+fissix = { version = "*", python = ">=3.13" }
 fs = "*"
 future = ">=1.0.0"  # Python 3.12 support
 graphene = "*"
