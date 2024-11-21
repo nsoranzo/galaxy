@@ -2,7 +2,7 @@ name: Update PR title
 
 on:
   pull_request_target:
-    types: [opened, edited]
+    types: [opened, edited, reopened]
     branches:
       - "release_**"
 
@@ -13,6 +13,9 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@v4
+      - run: echo "${{ github.base_ref }}"
+      - if: github.event_name == 'edited'
+        run: echo "${{ github.event.pull_request.changes }}"
       - name: Update PR title
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
