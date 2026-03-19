@@ -340,7 +340,7 @@ class BaseAppConfiguration(HasDynamicProperties):
                 except Exception:
                     pass  # Not an INI file
 
-        def _set_config_directories():
+        def _set_config_directories() -> None:
             # Set config_dir to value from kwargs OR dirname of config_file OR None
             _config_dir = os.path.dirname(self.config_file) if self.config_file else None
             self.config_dir = config_kwargs.get("config_dir", _config_dir)
@@ -725,10 +725,12 @@ class GalaxyAppConfiguration(BaseAppConfiguration, CommonConfigurationMixin):
     allow_local_account_creation: bool
     allowed_origin_hostnames: list[str]
     builds_file_path: str
+    celery_conf: dict[str, Any] | None
     container_resolvers_config_file: str
     database_connection: str
     drmaa_external_runjob_script: str
     email_from: Optional[str]
+    enable_celery_tasks: bool
     enable_tool_shed_check: bool
     file_source_temp_dir: str
     galaxy_data_manager_data_path: str
@@ -1467,7 +1469,7 @@ class GalaxyAppConfiguration(BaseAppConfiguration, CommonConfigurationMixin):
         """
         celery_enabled = self.enable_celery_tasks
         try:
-            fetch_disabled = self.celery_conf["task_routes"]["galaxy.fetch_data"] == DISABLED_FLAG
+            fetch_disabled = self.celery_conf and self.celery_conf["task_routes"]["galaxy.fetch_data"] == DISABLED_FLAG
         except (
             TypeError,
             KeyError,
