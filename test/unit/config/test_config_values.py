@@ -3,9 +3,12 @@ import os
 import pytest
 
 from galaxy import config
-from galaxy.config import DEFAULT_EMAIL_FROM_LOCAL_PART
+from galaxy.config import (
+    DEFAULT_EMAIL_FROM_LOCAL_PART,
+    GalaxyAppConfiguration,
+)
 from galaxy.exceptions import ConfigurationError
-from galaxy.util.properties import running_from_source
+from galaxy.util.resources import resource_path
 
 
 @pytest.fixture()
@@ -17,13 +20,10 @@ def test_root(appconfig):
     assert appconfig.root == os.path.abspath(".")
 
 
-def test_common_base_config(appconfig):
+def test_common_base_config(appconfig: GalaxyAppConfiguration) -> None:
     assert appconfig.shed_tools_dir == os.path.join(appconfig.data_dir, "shed_tools")
-    if running_from_source:
-        expected_path = os.path.join(appconfig.root, "lib", "galaxy", "config", "sample")
-    else:
-        expected_path = os.path.join(appconfig.root, "galaxy", "config", "sample")
-    assert appconfig.sample_config_dir == expected_path
+    expected_path = resource_path(config, "sample/build_sites.yml.sample")
+    assert appconfig.build_sites_config_file == expected_path
 
 
 def test_base_config_if_running_from_source(monkeypatch):

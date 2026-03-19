@@ -61,6 +61,7 @@ from ..version import (
 
 if TYPE_CHECKING:
     from galaxy.model import User
+    from galaxy.util.resources import Traversable
 
 log = logging.getLogger(__name__)
 
@@ -351,9 +352,7 @@ class BaseAppConfiguration(HasDynamicProperties):
             if self.data_dir:
                 self.data_dir = os.path.abspath(self.data_dir)
 
-            self.sample_config_dir = os.path.join(os.path.dirname(__file__), "sample")
-            if self.sample_config_dir:
-                self.sample_config_dir = os.path.abspath(self.sample_config_dir)
+            self.sample_config_dir = resource_path(__name__, "sample")
 
             self.managed_config_dir = config_kwargs.get("managed_config_dir")
             if self.managed_config_dir:
@@ -395,8 +394,7 @@ class BaseAppConfiguration(HasDynamicProperties):
                 if not self.is_set(key):
                     defaults = listify(getattr(self, key), do_strip=True)
                     sample = f"{defaults[-1]}.sample"  # if there are multiple defaults, use last as template
-                    sample = self._in_sample_dir(sample)  # resolve w.r.t sample_dir
-                    defaults.append(sample)
+                    defaults.append(self._in_sample_dir(sample))
                     setattr(self, key, defaults)
 
     def _postprocess_paths_to_resolve(self):
@@ -515,42 +513,41 @@ class BaseAppConfiguration(HasDynamicProperties):
             elif key not in base_configs:
                 raise ConfigurationError(f"Attempting to override existing attribute '{key}'")
 
-    def _resolve_paths(self):
-        def resolve(key):
-            if key in _cache:  # resolve each path only once
-                return _cache[key]
-
-            path = getattr(self, key)  # path prior to being resolved
-            parent = self.schema.paths_to_resolve.get(key)
-            if not parent:  # base case: nothing else needs resolving
-                return path
-            parent_path = resolve(parent)  # recursively resolve parent path
+    def _resolve_paths(self) -> None:
+        def _join_paths(key: str, parent_path: str, path: "str | Traversable | None") -> "str | Traversable | None":
             if path:
-                path = os.path.join(parent_path, path)  # resolve path
+                # if path is a Traversable, it's a sample file, so no need to resolve it
+                if isinstance(path, str):
+                    path = os.path.join(parent_path, path)  # resolve path
             else:
                 log.warning(
                     "Trying to resolve path for the '%s' option but it's empty/None",
                     key,
                 )
-
-            setattr(self, key, path)  # update property
-            _cache[key] = path  # cache it!
             return path
 
-        _cache = {}
+        def resolve(key: str):
+            if key in _cache:  # resolve each path only once
+                return _cache[key]
+
+            value = getattr(self, key)  # value prior to being resolved
+            parent = self.schema.paths_to_resolve.get(key)
+            if parent:
+                parent_path = resolve(parent)  # recursively resolve parent path
+
+                # Check if value is a list or should be listified; if so, listify and resolve each item separately.
+                if isinstance(value, list) or (self.listify_options and key in self.listify_options):
+                    paths = listify(value, do_strip=True)
+                    value = [_join_paths(key, parent_path, path) for path in paths]
+                else:
+                    value = _join_paths(key, parent_path, value)
+                setattr(self, key, value)
+            _cache[key] = value  # cache it!
+            return value
+
+        _cache: dict[str, Any] = {}
         for key in self.schema.paths_to_resolve:
-            value = getattr(self, key)
-            # Check if value is a list or should be listified; if so, listify and resolve each item separately.
-            if isinstance(value, list) or (self.listify_options and key in self.listify_options):
-                saved_values = listify(getattr(self, key), do_strip=True)  # listify and save original value
-                setattr(self, key, "_")  # replace value with temporary placeholder
-                resolve(key)  # resolve temporary value (`_` becomes `parent-path/_`)
-                resolved_base = getattr(self, key)[:-1]  # get rid of placeholder in resolved path
-                # apply resolved base to saved values
-                resolved_paths = [os.path.join(resolved_base, value) for value in saved_values]
-                setattr(self, key, resolved_paths)  # set config.key to a list of resolved paths
-            else:
-                resolve(key)
+            resolve(key)
             # Check options that have been set and may need to be resolved w.r.t. root
             if self.is_set(key) and self.paths_to_check_against_root and key in self.paths_to_check_against_root:
                 self._check_against_root(key)
@@ -599,8 +596,8 @@ class BaseAppConfiguration(HasDynamicProperties):
     def _in_config_dir(self, path: OptStr) -> OptStr:
         return self._in_dir(self.config_dir, path)
 
-    def _in_sample_dir(self, path: OptStr) -> OptStr:
-        return self._in_dir(self.sample_config_dir, path)
+    def _in_sample_dir(self, path: str) -> "Traversable":
+        return self.sample_config_dir / path
 
     def _in_data_dir(self, path: OptStr) -> OptStr:
         return self._in_dir(self.data_dir, path)
