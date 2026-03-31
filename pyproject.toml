@@ -30,7 +30,7 @@ dependencies = [
     "circus",
     "conda-package-streaming",
     "CT3>=3.3.3",  # Python 3.13 support
-    "cwl-utils>=0.13",
+    "cwl-utils>=0.41",  # to allow ruamel.yaml>=0.19.1
     "cwltool>=3.1.20230624081518",  # save time, minimum needed by cwl-1.0 branch
     "dictobj",
     "dnspython",
@@ -94,7 +94,7 @@ dependencies = [
     "rocrate",
     "Routes",
     "s3fs>=2023.1.0",
-    "schema-salad>=8.7.20240905150001",  # Python 3.13 support
+    "schema-salad>=8.9.20260327095315",  # to allow ruamel.yaml>=0.19.1
     "slowapi",
     "social-auth-core>=4.5.0",  # to drop dependency on abandoned python-jose
     "sortedcontainers",
@@ -265,6 +265,7 @@ keep-runtime-typing = true
 constraint-dependencies = [
     "limits>=2.5.0",  # prefer not downgrading this to upgrading packaging
     "mirakuru!=3.0.0",  # https://github.com/dbfixtures/mirakuru/pull/949
+    "ruamel.yaml>=0.19.1",  # for free-threaded Python support
     "setuptools<82",  # https://github.com/PyFilesystem/pyfilesystem2/issues/597
     "scipy>=1.14.1; python_version>='3.10'",  # Python 3.13 support
 ]
