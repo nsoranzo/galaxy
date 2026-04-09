@@ -269,6 +269,11 @@ constraint-dependencies = [
     "scipy>=1.14.1; python_version>='3.10'",  # Python 3.13 support
 ]
 default-groups = []
-extra-index-url = ["https://wheels.galaxyproject.org/simple"]
+exclude-newer = "1 week"
 index-strategy = "unsafe-best-match"
 package = false
+required-version = ">=0.11.5"
+
+[[tool.uv.index]]
+exclude-newer = false
+url = "https://wheels.galaxyproject.org/simple"
