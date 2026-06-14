@@ -33,7 +33,7 @@ jobs:
       || github.ref_name == 'dev'
       || startsWith(github.ref_name, 'release_')
     name: Prepare mulled resolution cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - name: Select weekly cache
         run: echo "MULLED_CACHE_WEEK=$(date -u +%G-%V)" >> "$GITHUB_ENV"
@@ -93,7 +93,7 @@ jobs:
       || startsWith(github.ref_name, 'release_')
     name: Test
     needs: prepare-mulled-cache
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
