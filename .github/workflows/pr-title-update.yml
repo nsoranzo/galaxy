@@ -10,7 +10,7 @@ permissions: {}
 jobs:
   update-title:
     if: github.repository_owner == 'galaxyproject' && (github.event.action != 'edited' || github.event.changes.base.ref.from != '')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     permissions:
       pull-requests: write
     steps:

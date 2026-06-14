@@ -8,7 +8,7 @@ jobs:
   update_dependencies:
     name: Update dependencies
     if: github.repository_owner == 'galaxyproject'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7.0.0
         with:

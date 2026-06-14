@@ -14,7 +14,7 @@ concurrency:
 permissions: {}
 jobs:
   client-unit-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7.0.0
         with:
