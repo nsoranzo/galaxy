@@ -1,0 +1,31 @@
+name: Install Apptainer
+description: Install Apptainer's singularity from the official PPA
+runs:
+  using: "composite"
+  steps:
+    - name: Add Apptainer official PPA
+      run: |
+        sudo add-apt-repository -y ppa:apptainer/ppa
+      shell: bash
+    - name: Force APT to treat this PPA as a standard amd64 repository
+      run: |
+        sudo sed -i '/Suites: resolute/a Architectures: amd64' /etc/apt/sources.list.d/apptainer-ubuntu-ppa-resolute.sources
+      shell: bash
+    - name: Pin the apptainer package to the PPA
+      # to avoid apt choosing the amd64v3 version from the Ubuntu repositories.
+      run: |
+        sudo tee /etc/apt/preferences.d/pin-apptainer-ppa <<EOF
+        Package: *
+        Pin: release o=LP-PPA-apptainer-ppa
+        Pin-Priority: 1001
+        EOF
+      shell: bash
+    - name: Install apptainer package
+      run: |
+        sudo apt-get update
+        # Diagnostic: Check what APT thinks before installing
+        apt policy apptainer
+        # Need to explicitly install squashfuse due to
+        # https://bugs.launchpad.net/ubuntu/+source/apptainer/+bug/2152206
+        sudo apt-get -y install apptainer squashfuse
+      shell: bash
