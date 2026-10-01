@@ -35,14 +35,14 @@ cd "$(dirname "$0")"
 TEST_PYTHON=${TEST_PYTHON:-"python3"}
 
 if command -v uv >/dev/null; then
-    VENV_CMD="uv venv --python $TEST_PYTHON"
+    VENV_CMD=(uv venv --python "$TEST_PYTHON")
     PIP_CMD="$(command -v uv) pip"
     BUILD_WHEEL_CMD="$(command -v uv) build"
     TWINE_CMD="$(command -v uvx) twine"
     export UV_EXTRA_INDEX_URL=https://wheels.galaxyproject.org/simple
     export UV_INDEX_STRATEGY=unsafe-best-match
 else
-    VENV_CMD="$TEST_PYTHON -m venv"
+    VENV_CMD=("$TEST_PYTHON" -m venv)
     PIP_CMD='python -m pip'
     BUILD_WHEEL_CMD='python -m build'
     TWINE_CMD=twine
@@ -70,7 +70,7 @@ while read -r package_dir || [ -n "$package_dir" ]; do  # https://stackoverflow.
 
     # Use a throw-away virtualenv
     TEST_ENV_DIR=$(mktemp -d -t gxpkgtestenvXXXXXX)
-    ${VENV_CMD} "${TEST_ENV_DIR}"
+    "${VENV_CMD[@]}" "${TEST_ENV_DIR}"
     # shellcheck disable=SC1091
     . "${TEST_ENV_DIR}/bin/activate"
     if [ "${PIP_CMD}" = 'python -m pip' ]; then
